@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/prevBtn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/prev_btn"
+            android:padding="0dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:onClick="onPrevButtonClick"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/helloWorldText"
+            android:text="1/ 5"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:layout_weight="1" />
+        <ImageButton
+            android:id="@+id/nextBtn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/next_btn"
+            android:padding="0dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:onClick="onNextButtonClick"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@mipmap/cat1"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
