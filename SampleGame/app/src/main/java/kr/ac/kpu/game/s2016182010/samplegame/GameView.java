@@ -17,8 +17,8 @@ public class GameView extends View {
     private Bitmap bitmap;
     private float x;
     private float y;
-    private int lastFrame;
-    private int frameTime;
+    private long lastFrame;
+    private float frameTime;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -39,8 +39,8 @@ public class GameView extends View {
 
     private void doGameFrameLoop() {
 //        update();
-        x += 1f;
-        y += 2f;
+        x += 100f * frameTime;
+        y += 200f * frameTime;
 
 //        draw();
         invalidate();
@@ -48,9 +48,12 @@ public class GameView extends View {
                 new Choreographer.FrameCallback() {
                     @Override
                     public void doFrame(long time) {
-                        frameTime = (int) (time - lastFrame);
-                        lastFrame = (int) time;
+                        if(lastFrame == 0){
+                            lastFrame = time;
+                        }
+                        frameTime = ((float) (time - lastFrame) / 1000000000.0f);
                         doGameFrameLoop();
+                        lastFrame = time;
                     }
                 }
         );
