@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-public class Player {
+public class Player implements GameObject {
     private static Bitmap bitmap;
     private static int imageWidth;
     private static int imageHeight;
@@ -36,10 +36,12 @@ public class Player {
         this.y = y;
     }
 
+    @Override
     public void update() {
 
     }
 
+    @Override
     public void draw(Canvas canvas) {
         float left = this.x - Player.imageWidth / 2;
         float top = this.y - Player.imageHeight / 2;

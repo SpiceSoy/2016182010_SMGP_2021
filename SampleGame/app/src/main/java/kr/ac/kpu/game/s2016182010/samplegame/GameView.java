@@ -12,6 +12,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,7 +21,7 @@ public class GameView extends View {
     public static final int BALL_COUNT = 10;
     public static GameView instance;
 
-    private ArrayList<Ball> balls = new ArrayList<>();
+    private ArrayList<GameObject> objects = new ArrayList<>();
     private Player player;
 
     private long lastFrame;
@@ -45,16 +46,16 @@ public class GameView extends View {
             float y = rand.nextInt(1000);
             float dx = rand.nextFloat() * 1000 - 500;
             float dy = rand.nextFloat() * 1000 - 500;
-            balls.add(new Ball(x, y, dx, dy));
+            objects.add(new Ball(x, y, dx, dy));
         }
+        objects.add(player);
     }
 
     private void doGameFrameLoop() {
 //      update();
-        for (Ball b : balls) {
-            b.update();
+        for (GameObject o : objects) {
+            o.update();
         }
-        player.update();
 
 //      draw();
         invalidate();
@@ -75,10 +76,9 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for (Ball b : balls) {
-            b.draw(canvas);
+        for (GameObject o : objects) {
+            o.draw(canvas);
         }
-        player.draw(canvas);
     }
 
     @Override

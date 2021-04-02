@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-public class Ball {
+public class Ball implements GameObject {
     private static Bitmap bitmap;
     private static int imageWidth;
     private static int imageHeight;
@@ -31,6 +31,7 @@ public class Ball {
         this.dy = dy;
     }
 
+    @Override
     public void update() {
         this.x += this.dx * GameView.frameTime;
         this.y += this.dy * GameView.frameTime;
@@ -47,6 +48,7 @@ public class Ball {
         }
     }
 
+    @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(bitmap, this.x, this.y, null);
     }
