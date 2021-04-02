@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.Choreographer;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -16,10 +17,11 @@ import java.util.Random;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
-    public static final int BALL_COUNT = 100;
+    public static final int BALL_COUNT = 10;
     public static GameView instance;
 
     private ArrayList<Ball> balls = new ArrayList<>();
+    private Player player;
 
     private long lastFrame;
     public static float frameTime;
@@ -36,6 +38,7 @@ public class GameView extends View {
     }
 
     private void initResources() {
+        player = new Player(100,100,0,0);
         Random rand = new Random();
         for (int i = 0; i < BALL_COUNT; ++i) {
             float x = rand.nextInt(1000);
@@ -51,6 +54,7 @@ public class GameView extends View {
         for (Ball b : balls) {
             b.update();
         }
+        player.update();
 
 //      draw();
         invalidate();
@@ -74,5 +78,16 @@ public class GameView extends View {
         for (Ball b : balls) {
             b.draw(canvas);
         }
+        player.draw(canvas);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+            player.moveTo(event.getX(), event.getY());
+            return true;
+        }
+        return false;
     }
 }
