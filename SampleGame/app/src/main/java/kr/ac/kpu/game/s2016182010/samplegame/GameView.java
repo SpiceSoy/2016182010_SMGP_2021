@@ -17,6 +17,11 @@ public class GameView extends View {
     private Bitmap bitmap;
     private float x;
     private float y;
+
+    private float x2;
+    private float y2;
+
+
     private long lastFrame;
     private float frameTime;
 
@@ -31,6 +36,8 @@ public class GameView extends View {
         bitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
         x = 100;
         y = 100;
+        x2 = 1000;
+        y2 = 100;
     }
 
     private void startUpdating() {
@@ -38,17 +45,20 @@ public class GameView extends View {
     }
 
     private void doGameFrameLoop() {
-//        update();
+//      update();
         x += 100f * frameTime;
         y += 200f * frameTime;
 
-//        draw();
+        x2 += -50f * frameTime;
+        y2 += 150f * frameTime;
+
+//      draw();
         invalidate();
         Choreographer.getInstance().postFrameCallback(
                 new Choreographer.FrameCallback() {
                     @Override
                     public void doFrame(long time) {
-                        if(lastFrame == 0){
+                        if (lastFrame == 0) {
                             lastFrame = time;
                         }
                         frameTime = ((float) (time - lastFrame) / 1000000000.0f);
@@ -63,5 +73,6 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         Log.d(TAG, "Drawing at : " + x + ", " + y + " / frame time : " + frameTime);
         canvas.drawBitmap(bitmap, x, y, null);
+        canvas.drawBitmap(bitmap, x2,y2, null);
     }
 }
