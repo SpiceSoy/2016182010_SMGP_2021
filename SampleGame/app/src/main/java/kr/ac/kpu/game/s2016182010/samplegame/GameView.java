@@ -25,8 +25,8 @@ public class GameView extends View {
         super(context, attrs);
         GameView.instance = this;
 
-        b1 = new Ball(100, 100, 100, 200);
-        b2 = new Ball(1000, 100, -50, 150);
+        b1 = new Ball(100, 100, 200, 300);
+        b2 = new Ball(1000, 100, -300, 350);
 
         startUpdating();
     }

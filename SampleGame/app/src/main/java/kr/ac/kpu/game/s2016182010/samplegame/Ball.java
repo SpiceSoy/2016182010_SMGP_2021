@@ -6,8 +6,12 @@ import android.graphics.Canvas;
 
 public class Ball {
     private static Bitmap bitmap;
+    private static int w;
+    private static int h;
+
     private float x;
     private float y;
+
     private float dx;
     private float dy;
 
@@ -17,6 +21,8 @@ public class Ball {
                     GameView.instance.getResources(),
                     R.mipmap.soccer_ball_240
             );
+            Ball.w = bitmap.getWidth();
+            Ball.h = bitmap.getHeight();
         }
 
         this.x = x;
@@ -28,6 +34,17 @@ public class Ball {
     public void update() {
         this.x += this.dx * GameView.frameTime;
         this.y += this.dy * GameView.frameTime;
+
+        int w = GameView.instance.getWidth();
+        int h = GameView.instance.getHeight();
+
+        if (x < 0 || x + Ball.w > w){
+            this.dx *= -1;
+        }
+
+        if (y < 0 || y + Ball.h > h){
+            this.dy *= -1;
+        }
     }
 
     public void draw(Canvas canvas) {
