@@ -21,22 +21,22 @@ Flappy Ball
 
 * 타이틀 화면 / 랭킹 화면 / 게임 오버 화면
 <br>
-<img src="doc/TITLE.png" width="30%" height="30%"></img>
-<img src="doc/RANKING.png" width="30%" height="30%"></img>
-<img src="doc/GAMEOVER.png" width="30%" height="30%"></img>
+<img src="/Doc/TITLE.png" width="30%" height="30%"></img>
+<img src="/Doc/RANKING.png" width="30%" height="30%"></img>
+<img src="/Doc/GAMEOVER.png" width="30%" height="30%"></img>
 <br>
 간단하게 버튼으로 넘어다니는 UI로 구현할 예정.
 랭킹의 경우 스크롤링 가능하도록 레이아웃을 짤 예정
 
 * 게임 화면
 <br>
-<img src="doc/flappy.jpg"></img>
+<img src="/Doc/flappy.jpg"></img>
 <br>
 캐릭터의 골프공 조작 방식을 제외하면 플래피버드와 동일하게 진행   
 
 * 조작 방법
 <br>
-<img src="doc/touch.png" width="30%" height="30%"></img>
+<img src="/Doc/touch.png" width="30%" height="30%"></img>
 <br>
 
 ## 4. 개발 일정
