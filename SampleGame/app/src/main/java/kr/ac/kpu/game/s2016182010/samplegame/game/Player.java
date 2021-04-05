@@ -23,6 +23,7 @@ public class Player implements GameObject {
 
     private float dx;
     private float dy;
+    private float angle;
 
     public Player(float x, float y, float dx, float dy) {
         if (bitmap == null) {
@@ -49,26 +50,25 @@ public class Player implements GameObject {
     public void moveTo(float x, float y) {
         this.tx = x;
         this.ty = y;
+        float deltaX = tx - this.x;
+        float deltaY = ty - this.y;
+        angle = (float) Math.atan2(deltaY, deltaX);
+        MainGame game = MainGame.get();
+        float move_dist = speed * game.frameTime;
+        dx = (float) (move_dist * Math.cos(angle));
+        dy = (float) (move_dist * Math.sin(angle));
     }
 
     @Override
     public void update() {
-        MainGame game = MainGame.get();
-        float deltaX = tx - x;
-        float deltaY = ty - y;
-        float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        float move_dist = speed * game.frameTime;
-
-        if (move_dist > distance) {
+        if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {
             x = tx;
-            y = ty;
-        } else {
-            float angle = (float) Math.atan2(deltaY, deltaX);
-            float mx = (float) (move_dist * Math.cos(angle));
-            float my = (float) (move_dist * Math.sin(angle));
-            this.x += mx;
-            this.y += my;
         }
+        if ((dy > 0 && y > ty) || (dy < 0 && y < ty)) {
+            y = ty;
+        }
+        this.x += dx;
+        this.y += dy;
     }
 
     @Override
