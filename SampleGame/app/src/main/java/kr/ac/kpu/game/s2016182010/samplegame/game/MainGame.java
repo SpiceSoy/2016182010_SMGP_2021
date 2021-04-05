@@ -11,8 +11,9 @@ import kr.ac.kpu.game.s2016182010.samplegame.ui.view.GameView;
 
 public class MainGame {
     static MainGame instance;
-    public static MainGame get(){
-        if(instance == null){
+
+    public static MainGame get() {
+        if (instance == null) {
             instance = new MainGame();
         }
         return instance;
@@ -27,10 +28,10 @@ public class MainGame {
     private boolean initialized = false;
 
     public void initResources() {
-        if(initialized) return;
+        if (initialized) return;
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
-        player = new Player(w/2,h/2,0,0);
+        player = new Player(w / 2, h / 2, 0, 0);
         Random rand = new Random();
         for (int i = 0; i < BALL_COUNT; ++i) {
             float x = rand.nextInt(1000);
@@ -52,7 +53,7 @@ public class MainGame {
 
     public void draw(Canvas canvas) {
 //        if(!initialized) return;  //현재는 무의미
-        for (GameObject o : objects){
+        for (GameObject o : objects) {
             o.draw(canvas);
         }
     }
@@ -66,7 +67,18 @@ public class MainGame {
         return false;
     }
 
-    public void add(GameObject obj) {
-        this.objects.add(obj);
+    public void add(GameObject gameObject) {
+        this.objects.add(gameObject);
+    }
+
+    public void remove(GameObject gameObject) {
+        GameView.instance.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        objects.remove(gameObject);
+                    }
+                }
+        );
     }
 }
