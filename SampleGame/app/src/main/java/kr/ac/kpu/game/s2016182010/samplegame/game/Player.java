@@ -48,15 +48,18 @@ public class Player implements GameObject {
     }
 
     public void moveTo(float x, float y) {
-        this.tx = x;
-        this.ty = y;
-        float deltaX = tx - this.x;
-        float deltaY = ty - this.y;
-        angle = (float) Math.atan2(deltaY, deltaX);
+        Bullet bullet = new Bullet(this.x, this.y, x, y);
         MainGame game = MainGame.get();
-        float move_dist = speed * game.frameTime;
-        dx = (float) (move_dist * Math.cos(angle));
-        dy = (float) (move_dist * Math.sin(angle));
+        game.add(bullet);
+//        this.tx = x;
+//        this.ty = y;
+//        float deltaX = tx - this.x;
+//        float deltaY = ty - this.y;
+//        angle = (float) Math.atan2(deltaY, deltaX);
+//        MainGame game = MainGame.get();
+//        float move_dist = speed * game.frameTime;
+//        dx = (float) (move_dist * Math.cos(angle));
+//        dy = (float) (move_dist * Math.sin(angle));
     }
 
     @Override

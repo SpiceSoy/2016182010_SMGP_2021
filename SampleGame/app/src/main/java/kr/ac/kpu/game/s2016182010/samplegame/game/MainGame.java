@@ -65,4 +65,8 @@ public class MainGame {
         }
         return false;
     }
+
+    public void add(GameObject obj) {
+        this.objects.add(obj);
+    }
 }
