@@ -37,8 +37,9 @@ public class Ball implements GameObject {
 
     @Override
     public void update() {
-        this.x += this.dx * GameView.frameTime;
-        this.y += this.dy * GameView.frameTime;
+        MainGame game = MainGame.get();
+        this.x += this.dx * game.frameTime;
+        this.y += this.dy * game.frameTime;
 
         int w = GameView.instance.getWidth();
         int h = GameView.instance.getHeight();

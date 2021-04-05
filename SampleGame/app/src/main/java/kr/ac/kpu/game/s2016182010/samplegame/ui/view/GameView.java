@@ -9,28 +9,18 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import kr.ac.kpu.game.s2016182010.samplegame.game.Ball;
-import kr.ac.kpu.game.s2016182010.samplegame.framework.GameObject;
-import kr.ac.kpu.game.s2016182010.samplegame.game.Player;
+import kr.ac.kpu.game.s2016182010.samplegame.game.MainGame;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
-    public static final int BALL_COUNT = 10;
     public static GameView instance;
-
-    private ArrayList<GameObject> objects = new ArrayList<>();
-    private Player player;
-
     private long lastFrame;
-    public static float frameTime;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         GameView.instance = this;
-        initResources();
+        MainGame game = MainGame.get();
+        game.initResources();
         startUpdating();
     }
 
@@ -38,24 +28,10 @@ public class GameView extends View {
         doGameFrameLoop();
     }
 
-    private void initResources() {
-        player = new Player(100,100,0,0);
-        Random rand = new Random();
-        for (int i = 0; i < BALL_COUNT; ++i) {
-            float x = rand.nextInt(1000);
-            float y = rand.nextInt(1000);
-            float dx = rand.nextFloat() * 1000 - 500;
-            float dy = rand.nextFloat() * 1000 - 500;
-            objects.add(new Ball(x, y, dx, dy));
-        }
-        objects.add(player);
-    }
-
     private void doGameFrameLoop() {
 //      update();
-        for (GameObject o : objects) {
-            o.update();
-        }
+        MainGame game = MainGame.get();
+        game.update();
 
 //      draw();
         invalidate();
@@ -66,7 +42,7 @@ public class GameView extends View {
                         if (lastFrame == 0) {
                             lastFrame = time;
                         }
-                        frameTime = ((float) (time - lastFrame) / 1000000000.0f);
+                        game.frameTime = ((float) (time - lastFrame) / 1000000000.0f);
                         doGameFrameLoop();
                         lastFrame = time;
                     }
@@ -76,18 +52,13 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for (GameObject o : objects) {
-            o.draw(canvas);
-        }
+        MainGame game = MainGame.get();
+        game.draw(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-            player.moveTo(event.getX(), event.getY());
-            return true;
-        }
-        return false;
+        MainGame game = MainGame.get();
+        return game.onTouchEvent(event);
     }
 }
