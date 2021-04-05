@@ -13,8 +13,13 @@ public class Player implements GameObject {
     private static int imageWidth;
     private static int imageHeight;
 
+    private float speed;
+
     private float x;
     private float y;
+
+    private float tx;
+    private float ty;
 
     private float dx;
     private float dy;
@@ -29,20 +34,35 @@ public class Player implements GameObject {
             Player.imageHeight = bitmap.getHeight();
         }
 
+        this.speed = 800;
+
         this.x = x;
         this.y = y;
+
+        this.tx = 0;
+        this.ty = 0;
+
         this.dx = dx;
         this.dy = dy;
     }
 
     public void moveTo(float x, float y) {
-        this.x = x;
-        this.y = y;
+        this.tx = x;
+        this.ty = y;
     }
 
     @Override
     public void update() {
-
+        MainGame game = MainGame.get();
+        float deltaX = tx - x;
+        float deltaY = ty - y;
+        float distance = (float)Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        float angle = (float)Math.atan2(deltaY, deltaX);
+        float move_dist = speed * game.frameTime;
+        float mx = (float) (move_dist * Math.cos(angle));
+        float my = (float) (move_dist * Math.sin(angle));
+        this.x += mx;
+        this.y += my;
     }
 
     @Override
