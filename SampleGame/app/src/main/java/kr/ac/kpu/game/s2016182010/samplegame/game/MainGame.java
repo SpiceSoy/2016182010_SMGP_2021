@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import kr.ac.kpu.game.s2016182010.samplegame.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.samplegame.ui.view.GameView;
 
 public class MainGame {
     static MainGame instance;
@@ -23,9 +24,13 @@ public class MainGame {
     private ArrayList<GameObject> objects = new ArrayList<>();
     private Player player;
 
+    private boolean initialized = false;
 
     public void initResources() {
-        player = new Player(100,100,0,0);
+        if(initialized) return;
+        float w = GameView.instance.getWidth();
+        float h = GameView.instance.getHeight();
+        player = new Player(w/2,h/2,0,0);
         Random rand = new Random();
         for (int i = 0; i < BALL_COUNT; ++i) {
             float x = rand.nextInt(1000);
@@ -35,15 +40,18 @@ public class MainGame {
             objects.add(new Ball(x, y, dx, dy));
         }
         objects.add(player);
+        initialized = true;
     }
 
     public void update() {
+//        if(!initialized) return;  //현재는 무의미
         for (GameObject o : objects) {
             o.update();
         }
     }
 
     public void draw(Canvas canvas) {
+//        if(!initialized) return;  //현재는 무의미
         for (GameObject o : objects){
             o.draw(canvas);
         }
