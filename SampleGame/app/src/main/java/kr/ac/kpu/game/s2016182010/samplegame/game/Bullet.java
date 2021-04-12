@@ -68,6 +68,11 @@ public class Bullet implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        bitmap.draw(canvas, x, y, (float)Math.toDegrees(angle) + 90.0f);
+        float degree =  (float)Math.toDegrees(angle) + 90.0f;
+        canvas.save();
+        canvas.rotate(degree, x, y);
+        bitmap.draw(canvas, x, y);
+        canvas.restore();
+
     }
 }

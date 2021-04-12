@@ -44,10 +44,6 @@ public class AnimationGameBitmap extends GameBitmap {
     }
 
     public void draw(Canvas canvas, float x, float y) {
-        this.draw(canvas, x, y, 0);
-    }
-
-    public void draw(Canvas canvas, float x, float y, float degree) {
         int hw = (int) (frameWidth *  0.5 * IMAGE_RATIO);
         int hh = (int) (frameHeight * 0.5 * IMAGE_RATIO);
 
@@ -61,14 +57,8 @@ public class AnimationGameBitmap extends GameBitmap {
                 x - hw, y - hh, x + hw, y + hh
         );
 
-        if (degree != 0) {
-            canvas.save();
-            canvas.rotate(degree, x, y);
-        }
+
         canvas.drawBitmap(bitmap, src, dst, null);
-        if (degree != 0) {
-            canvas.restore();
-        }
     }
 
     public int getWidth(){
