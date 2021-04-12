@@ -40,7 +40,7 @@ public class Bullet implements GameObject {
         dx = (float) (move_dist * Math.cos(angle));
         dy = (float) (move_dist * Math.sin(angle));
 
-        bitmap = new AnimationGameBitmap(R.mipmap.laser_light, FRAME_RATE, 10 );
+        bitmap = new AnimationGameBitmap(R.mipmap.bullet_hadoken, FRAME_RATE, 6 );
     }
 
     @Override
