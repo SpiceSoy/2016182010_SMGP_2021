@@ -6,16 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import kr.ac.kpu.game.s2016182010.samplegame.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.samplegame.R;
 import kr.ac.kpu.game.s2016182010.samplegame.ui.view.GameView;
 
 public class Ball implements GameObject {
-    private static Bitmap bitmap;
-    private static int imageWidth;
-    private static int imageHeight;
-    private static float FRAME_RATE = 8.5f;
-    private final long createdOn;
+    private AnimationGameBitmap bitmap;
 
     private float x;
     private float y;
@@ -23,23 +20,14 @@ public class Ball implements GameObject {
     private float dx;
     private float dy;
 
-    private int frameIndex;
+    private static float FRAME_RATE = 8.5f;
 
     public Ball(float x, float y, float dx, float dy) {
-        if(bitmap == null) {
-            bitmap = BitmapFactory.decodeResource(
-                    GameView.instance.getResources(),
-                    R.mipmap.fireball_128_24f
-            );
-            Ball.imageWidth = bitmap.getWidth();
-            Ball.imageHeight = bitmap.getHeight();
-        }
-
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
-        createdOn = System.currentTimeMillis();
+        bitmap = new AnimationGameBitmap(R.mipmap.fireball_128_24f, FRAME_RATE, 0);
     }
 
     @Override
@@ -51,30 +39,17 @@ public class Ball implements GameObject {
         int w = GameView.instance.getWidth();
         int h = GameView.instance.getHeight();
 
-        if (x < 0 || x + Ball.imageHeight > w){
+        if (x < 0 || x + bitmap.getWidth() > w){
             this.dx *= -1;
         }
 
-        if (y < 0 || y + Ball.imageHeight > h){
+        if (y < 0 || y + bitmap.getHeight() > h){
             this.dy *= -1;
         }
-
-        int elapsed = (int) (System.currentTimeMillis() - createdOn);
-        frameIndex = Math.round(elapsed * 0.001f * FRAME_RATE) % 24;
-//        frameIndex = (frameIndex + 1) % 24;
     }
 
     @Override
     public void draw(Canvas canvas) {
-        int ballRadius = 100;
-        int fw = imageWidth / 24;
-        int fh = imageHeight;
-        Rect src = new Rect(
-                (fw * frameIndex), 0, (fw * (frameIndex + 1)), fh
-        );
-        RectF dst = new RectF(
-                this.x - ballRadius,this.y - ballRadius, this.x + ballRadius, this.y + ballRadius
-        );
-        canvas.drawBitmap(bitmap, src, dst, null);
+        bitmap.draw(canvas, x, y);
     }
 }
