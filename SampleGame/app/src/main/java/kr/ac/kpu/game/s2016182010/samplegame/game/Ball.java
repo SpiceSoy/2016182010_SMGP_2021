@@ -48,13 +48,15 @@ public class Ball implements GameObject {
         int w = GameView.instance.getWidth();
         int h = GameView.instance.getHeight();
 
-        if (x < 0 || x + Ball.imageWidth > w){
+        if (x < 0 || x + Ball.imageHeight > w){
             this.dx *= -1;
         }
 
         if (y < 0 || y + Ball.imageHeight > h){
             this.dy *= -1;
         }
+
+        frameIndex = (frameIndex + 1) % 24;
     }
 
     @Override
