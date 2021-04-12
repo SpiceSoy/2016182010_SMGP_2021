@@ -46,9 +46,12 @@ public class Bullet implements GameObject {
         dy = (float) (move_dist * Math.sin(angle));
 
         if(bitmap == null) {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
             bitmap = BitmapFactory.decodeResource(
                     GameView.instance.getResources(),
-                    R.mipmap.laser_light
+                    R.mipmap.laser_light,
+                    options
             );
             Bullet.imageWidth = bitmap.getWidth();
             Bullet.imageHeight = bitmap.getHeight();
@@ -84,10 +87,10 @@ public class Bullet implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        int hw = 100;
-        int hh = 124;
         int fw = imageWidth / 10;
         int fh = imageHeight;
+        int hw = (int)(fw * 0.5f * 2);
+        int hh = (int)(fh * 0.5f * 2);
         Rect src = new Rect(
                 (fw * frameIndex), 0, (fw * (frameIndex + 1)), fh
         );
