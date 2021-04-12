@@ -3,6 +3,8 @@ package kr.ac.kpu.game.s2016182010.samplegame.game;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.samplegame.R;
@@ -19,11 +21,13 @@ public class Ball implements GameObject {
     private float dx;
     private float dy;
 
+    private int frameIndex;
+
     public Ball(float x, float y, float dx, float dy) {
         if(bitmap == null) {
             bitmap = BitmapFactory.decodeResource(
                     GameView.instance.getResources(),
-                    R.mipmap.soccer_ball_240
+                    R.mipmap.fireball_128_24f
             );
             Ball.imageWidth = bitmap.getWidth();
             Ball.imageHeight = bitmap.getHeight();
@@ -55,6 +59,15 @@ public class Ball implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, this.x, this.y, null);
+        int ballRadius = 100;
+        int fw = imageWidth / 24;
+        int fh = imageHeight;
+        Rect src = new Rect(
+                (fw * frameIndex), 0, (fw * (frameIndex + 1)), fh
+        );
+        RectF dst = new RectF(
+                this.x - ballRadius,this.y - ballRadius, this.x + ballRadius, this.y + ballRadius
+        );
+        canvas.drawBitmap(bitmap, src, dst, null);
     }
 }

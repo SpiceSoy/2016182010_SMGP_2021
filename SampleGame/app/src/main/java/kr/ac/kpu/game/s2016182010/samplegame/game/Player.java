@@ -53,8 +53,8 @@ public class Player implements GameObject {
         game.add(bullet);
 //        this.tx = x;
 //        this.ty = y;
-        float deltaX = tx - this.x;
-        float deltaY = ty - this.y;
+        float deltaX = x - this.x;
+        float deltaY = y - this.y;
         this.angle = (float) Math.atan2(deltaY, deltaX);
 
 //        MainGame game = MainGame.get();
@@ -79,7 +79,7 @@ public class Player implements GameObject {
     public void draw(Canvas canvas) {
         float left = this.x - Player.imageWidth / 2;
         float top = this.y - Player.imageHeight / 2;
-        float degree = (float) Math.toDegrees(this.angle) - 90.0f;
+        float degree = (float) Math.toDegrees(this.angle) + 90.0f;
         canvas.save();
         canvas.rotate(degree, x, y);
         canvas.drawBitmap(bitmap, left, top, null);
