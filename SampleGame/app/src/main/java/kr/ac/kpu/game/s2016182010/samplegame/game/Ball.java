@@ -14,6 +14,8 @@ public class Ball implements GameObject {
     private static Bitmap bitmap;
     private static int imageWidth;
     private static int imageHeight;
+    private static float FRAME_RATE = 8.5f;
+    private final long createdOn;
 
     private float x;
     private float y;
@@ -37,6 +39,7 @@ public class Ball implements GameObject {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
+        createdOn = System.currentTimeMillis();
     }
 
     @Override
@@ -56,7 +59,9 @@ public class Ball implements GameObject {
             this.dy *= -1;
         }
 
-        frameIndex = (frameIndex + 1) % 24;
+        int elapsed = (int) (System.currentTimeMillis() - createdOn);
+        frameIndex = Math.round(elapsed * 0.001f * FRAME_RATE) % 24;
+//        frameIndex = (frameIndex + 1) % 24;
     }
 
     @Override
