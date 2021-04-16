@@ -3,15 +3,18 @@ package kr.ac.kpu.game.s2016182010.samplegame.game;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 
 import kr.ac.kpu.game.s2016182010.samplegame.R;
 import kr.ac.kpu.game.s2016182010.samplegame.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.samplegame.framework.Sound;
 import kr.ac.kpu.game.s2016182010.samplegame.ui.view.GameView;
 
 public class Player implements GameObject {
     private static Bitmap bitmap;
     private static int imageWidth;
     private static int imageHeight;
+    private final MediaPlayer mediaPlayer;
 
     private float speed;
 
@@ -45,9 +48,12 @@ public class Player implements GameObject {
 
         this.dx = dx;
         this.dy = dy;
+
+        mediaPlayer = MediaPlayer.create(GameView.instance.getContext(), R.raw.hadouken);
     }
 
     public void moveTo(float x, float y) {
+        Sound.play(R.raw.hadouken);
         Bullet bullet = new Bullet(this.x, this.y, x, y);
         MainGame game = MainGame.get();
         game.add(bullet);

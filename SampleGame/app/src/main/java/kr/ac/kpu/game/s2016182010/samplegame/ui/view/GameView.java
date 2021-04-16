@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import kr.ac.kpu.game.s2016182010.samplegame.framework.Sound;
 import kr.ac.kpu.game.s2016182010.samplegame.game.MainGame;
 
 public class GameView extends View {
@@ -20,6 +21,7 @@ public class GameView extends View {
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         GameView.instance = this;
+        Sound.init(context);
     }
 
     private void update() {
