@@ -10,6 +10,7 @@ import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
 public class MainGame {
     static MainGame instance;
+    private Player player;
 
     public static MainGame get() {
         if (instance == null) {
@@ -30,6 +31,8 @@ public class MainGame {
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
 
+        player = new Player(w/2, h-300,0,0);
+        objects.add(player);
         initialized = true;
         return true;
     }

@@ -11,7 +11,7 @@ import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 public class GameBitmap {
     private static HashMap<Integer, Bitmap> bitmaps = new HashMap<>();
 
-    protected static Bitmap load(int resId) {
+    public static Bitmap load(int resId) {
         Bitmap bitmap;
         if (bitmaps.containsKey(resId)) {
             bitmap = bitmaps.get(resId);
