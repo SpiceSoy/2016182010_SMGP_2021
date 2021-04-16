@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import java.util.Random;
+
 import kr.ac.kpu.game.s2016182010.samplegame.R;
 import kr.ac.kpu.game.s2016182010.samplegame.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.samplegame.framework.GameObject;
@@ -40,7 +42,9 @@ public class Bullet implements GameObject {
         dx = (float) (move_dist * Math.cos(angle));
         dy = (float) (move_dist * Math.sin(angle));
 
-        bitmap = new AnimationGameBitmap(R.mipmap.bullet_hadoken, FRAME_RATE, 6 );
+        Random r = new Random();
+        float frameRate = FRAME_RATE * (r.nextFloat() * 0.4f + 0.8f);
+        bitmap = new AnimationGameBitmap(R.mipmap.bullet_hadoken, frameRate, 6 );
     }
 
     @Override
