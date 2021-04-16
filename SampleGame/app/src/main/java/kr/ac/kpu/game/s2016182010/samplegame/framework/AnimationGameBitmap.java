@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import java.util.HashMap;
+
 import kr.ac.kpu.game.s2016182010.samplegame.ui.view.GameView;
 
 public class AnimationGameBitmap extends GameBitmap {
@@ -20,12 +22,20 @@ public class AnimationGameBitmap extends GameBitmap {
     private final float framePerSec;
     private final int frameCount;
 
+    private static HashMap<Integer, Bitmap> bitmaps = new HashMap<>();
+
+
     public AnimationGameBitmap(int resId, float frameRate, int frameCount) {
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = false;
-        Resources res = GameView.instance.getResources();
-        bitmap = BitmapFactory.decodeResource(res, resId, options);
+        if (bitmaps.containsKey(resId)) {
+            bitmap = bitmaps.get(resId);
+        } else {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+            Resources res = GameView.instance.getResources();
+            bitmap = BitmapFactory.decodeResource(res, resId, options);
+            bitmaps.put(resId, bitmap);
+        }
 
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
@@ -44,7 +54,7 @@ public class AnimationGameBitmap extends GameBitmap {
     }
 
     public void draw(Canvas canvas, float x, float y) {
-        int hw = (int) (frameWidth *  0.5 * IMAGE_RATIO);
+        int hw = (int) (frameWidth * 0.5 * IMAGE_RATIO);
         int hh = (int) (frameHeight * 0.5 * IMAGE_RATIO);
 
         int elapsed = (int) (System.currentTimeMillis() - createdOn);
@@ -61,11 +71,11 @@ public class AnimationGameBitmap extends GameBitmap {
         canvas.drawBitmap(bitmap, src, dst, null);
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return this.frameWidth * IMAGE_RATIO;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return this.frameHeight * IMAGE_RATIO;
     }
 }
