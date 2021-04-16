@@ -1,15 +1,9 @@
 package kr.ac.kpu.game.s2016182010.samplegame.framework;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
-
-import java.util.HashMap;
-
-import kr.ac.kpu.game.s2016182010.samplegame.ui.view.GameView;
 
 public class AnimationGameBitmap extends GameBitmap {
     public static final int IMAGE_RATIO = 4;
@@ -22,21 +16,9 @@ public class AnimationGameBitmap extends GameBitmap {
     private final float framePerSec;
     private final int frameCount;
 
-    private static HashMap<Integer, Bitmap> bitmaps = new HashMap<>();
-
 
     public AnimationGameBitmap(int resId, float frameRate, int frameCount) {
-
-        if (bitmaps.containsKey(resId)) {
-            bitmap = bitmaps.get(resId);
-        } else {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inScaled = false;
-            Resources res = GameView.instance.getResources();
-            bitmap = BitmapFactory.decodeResource(res, resId, options);
-            bitmaps.put(resId, bitmap);
-        }
-
+        bitmap = GameBitmap.load(resId);
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
 
@@ -46,10 +28,8 @@ public class AnimationGameBitmap extends GameBitmap {
         } else {
             this.frameCount = frameCount;
         }
-
         frameWidth = imageWidth / this.frameCount;
         frameHeight = imageHeight;
-
         createdOn = System.currentTimeMillis();
     }
 
