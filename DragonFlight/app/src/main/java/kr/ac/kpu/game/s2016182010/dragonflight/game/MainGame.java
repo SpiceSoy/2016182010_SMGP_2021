@@ -31,7 +31,7 @@ public class MainGame {
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
 
-        player = new Player(w/2, h-300,0,0);
+        player = new Player(w / 2, h - 300, 0, 0);
         objects.add(player);
         initialized = true;
         return true;
@@ -53,8 +53,8 @@ public class MainGame {
 
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN) {
-//            if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+            player.moveTo(event.getX(), event.getY());
             return true;
         }
         return false;
