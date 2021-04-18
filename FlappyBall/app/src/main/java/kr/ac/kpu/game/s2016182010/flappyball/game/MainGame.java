@@ -5,11 +5,14 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.kpu.game.s2016182010.flappyball.R;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
 
 public class MainGame {
     static MainGame instance;
+    private Ball ball;
+
     public static MainGame get() {
         if (instance == null) {
             instance = new MainGame();
@@ -30,7 +33,8 @@ public class MainGame {
         float h = GameView.instance.getHeight();
 
 //        player = new Player(w / 2, h - 300, 0, 0);
-//        objects.add(player);
+        ball = new Ball(R.mipmap.bird1_1, w/2, h/2);
+        objects.add(ball);
         initialized = true;
         return true;
     }
