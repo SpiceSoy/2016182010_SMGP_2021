@@ -1,6 +1,7 @@
 package kr.ac.kpu.game.s2016182010.flappyball.game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
 
 public class MainGame {
+    private static final String TAG = MainGame.class.getSimpleName();
     static MainGame instance;
     private Ball ball;
 
@@ -53,12 +55,21 @@ public class MainGame {
         }
     }
 
+    float touchStartX;
+    float touchStartY;
     public boolean onTouchEvent(MotionEvent event) {
-//        int action = event.getAction();
-//        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-//            player.moveTo(event.getX(), event.getY());
-//            return true;
-//        }
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            touchStartX = event.getX();
+            touchStartY = event.getY();
+            Log.d(TAG, "start touch is " + touchStartX + ", " + touchStartY);
+            return true;
+        }
+        else if( action == MotionEvent.ACTION_UP ) {
+            Log.d(TAG, "shoot touch is " + event.getX() + ", " +  event.getY());
+            ball.shoot(touchStartX, touchStartY, event.getX(), event.getY());
+            return true;
+        }
         return false;
     }
 

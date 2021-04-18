@@ -10,8 +10,8 @@ import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
 
 public class Ball implements GameObject {
-    private static final float GRAVITY_FORCE = 9.8f * 100;
-    private static final float SHOOT_FORCE = 10.0f;
+    private static final float GRAVITY_FORCE = 9.8f * 100 * 7;
+    private static final float SHOOT_FORCE = 5.5f;
     private static final float IMAGE_RATIO = 3.0f;
     private float positionX;
     private float positionY;
@@ -36,6 +36,9 @@ public class Ball implements GameObject {
         this.velocityY += GRAVITY_FORCE * game.frameTime;
         this.positionX += this.velocityX * game.frameTime;
         this.positionY += this.velocityY * game.frameTime;
+        if(this.positionY > GameView.instance.getHeight()){
+            this.velocityY = 0;
+        }
         this.positionX = Math.max(Math.min(this.positionX, GameView.instance.getWidth()),0);
         this.positionY = Math.max(Math.min(this.positionY, GameView.instance.getHeight()),0);
     }
