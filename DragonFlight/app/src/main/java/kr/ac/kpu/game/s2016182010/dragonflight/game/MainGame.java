@@ -20,7 +20,6 @@ public class MainGame {
     }
 
     public float frameTime;
-    public static final int BALL_COUNT = 10;
 
     private ArrayList<GameObject> objects = new ArrayList<>();
 
@@ -31,21 +30,19 @@ public class MainGame {
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
 
-        player = new Player(w / 2, h - 300, 0, 0);
+        player = new Player(w / 2, h - 300);
         objects.add(player);
         initialized = true;
         return true;
     }
 
     public void update() {
-//        if(!initialized) return;  //현재는 무의미
         for (GameObject o : objects) {
             o.update();
         }
     }
 
     public void draw(Canvas canvas) {
-//        if(!initialized) return;  //현재는 무의미
         for (GameObject o : objects) {
             o.draw(canvas);
         }
