@@ -1,14 +1,16 @@
 package kr.ac.kpu.game.s2016182010.dragonflight.game;
 
 import android.graphics.Canvas;
+import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.dragonflight.R;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.AnimationGameBitmap;
+import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
-public class Enemy implements GameObject {
+public class Enemy implements GameObject, BoxCollidable {
     private static final float FRAMES_PER_SECOND = 8;
     private final float x;
     private final AnimationGameBitmap bitmap;
@@ -31,6 +33,11 @@ public class Enemy implements GameObject {
         if(y > GameView.instance.getHeight()) {
             game.remove(this);
         }
+    }
+
+    @Override
+    public RectF getBoundingRect() {
+        return this.bitmap.getBoundingRect(x, y);
     }
 
     @Override

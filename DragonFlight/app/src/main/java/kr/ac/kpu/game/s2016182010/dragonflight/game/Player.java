@@ -1,12 +1,14 @@
 package kr.ac.kpu.game.s2016182010.dragonflight.game;
 
 import android.graphics.Canvas;
+import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.dragonflight.R;
+import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 
-public class Player implements GameObject {
+public class Player implements GameObject, BoxCollidable {
     private static final int BULLET_SPEED = 1500;
     private static final float FIRE_RPS = 7.5f;
     private static final float FIRE_INTERVAL = 1.0f / FIRE_RPS;
@@ -51,6 +53,11 @@ public class Player implements GameObject {
         Bullet bullet = new Bullet(this.x, this.y, BULLET_SPEED);
         MainGame game = MainGame.get();
         game.add(bullet);
+    }
+
+    @Override
+    public RectF getBoundingRect() {
+        return this.bitmap.getBoundingRect(x, y);
     }
 
     @Override

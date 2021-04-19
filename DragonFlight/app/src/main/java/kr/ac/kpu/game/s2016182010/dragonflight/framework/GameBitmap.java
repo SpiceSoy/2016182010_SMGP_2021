@@ -42,6 +42,17 @@ public class GameBitmap {
         return bitmap.getHeight();
     }
 
+    public RectF getBoundingRect(float x, float y){
+        float hw = this.getWidth() / 2;
+        float hh = this.getHeight() / 2;
+
+        float left = x - hw * GameView.MULTIPLIER;
+        float top = y - hh * GameView.MULTIPLIER;
+        float right = x + hw * GameView.MULTIPLIER;
+        float bottom = y + hh * GameView.MULTIPLIER;
+        return new RectF(left, top, right, bottom);
+    }
+
     public void draw(Canvas canvas, float x, float y) {
         float hw = this.getWidth() / 2;
         float hh = this.getHeight() / 2;
