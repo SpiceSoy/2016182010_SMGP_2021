@@ -8,6 +8,9 @@ import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 
 public class Player implements GameObject {
     private static final int BULLET_SPEED = 1500;
+    private static final float FIRE_RPS = 7.5f;
+    private static final float FIRE_INTERVAL = 1.0f / FIRE_RPS;
+    private float fireTime;
     private GameBitmap bitmap;
     private float speed;
 
@@ -22,13 +25,11 @@ public class Player implements GameObject {
         this.x = x;
         this.y = y;
         this.tx = x;
+        this.fireTime = 0;
     }
 
     public void moveTo(float x, float y) {
         this.tx = x;
-        Bullet bullet = new Bullet(this.x, this.y, BULLET_SPEED);
-        MainGame game = MainGame.get();
-        game.add(bullet);
     }
 
     @Override
@@ -39,6 +40,17 @@ public class Player implements GameObject {
         if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {
             x = tx;
         }
+        fireTime += game.frameTime;
+        if (fireTime >= FIRE_INTERVAL) {
+            fireBullet();
+            fireTime -= FIRE_INTERVAL;
+        }
+    }
+
+    private void fireBullet() {
+        Bullet bullet = new Bullet(this.x, this.y, BULLET_SPEED);
+        MainGame game = MainGame.get();
+        game.add(bullet);
     }
 
     @Override
