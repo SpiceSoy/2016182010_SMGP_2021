@@ -12,8 +12,8 @@ public class EnemyGenerator implements GameObject {
     private float spawnInterval;
 
     public EnemyGenerator() {
-        this.time = 0.0f;
         this.spawnInterval = INITIAL_SPAWN_INTERVAL;
+        this.time = INITIAL_SPAWN_INTERVAL;
     }
     @Override
     public void update() {
