@@ -8,9 +8,10 @@ import android.graphics.RectF;
 import kr.ac.kpu.game.s2016182010.dragonflight.R;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
 public class Player implements GameObject {
-    private static final float IMAGE_RATIO = 2;
+    private static final int BULLET_SPEED = 1500;
     private Bitmap bitmap;
     private int imageWidth;
     private int imageHeight;
@@ -33,6 +34,9 @@ public class Player implements GameObject {
 
     public void moveTo(float x, float y) {
         this.tx = x;
+        Bullet bullet = new Bullet(this.x, this.y, BULLET_SPEED);
+        MainGame game = MainGame.get();
+        game.add(bullet);
     }
 
     @Override
@@ -50,10 +54,10 @@ public class Player implements GameObject {
         float hw = imageWidth / 2;
         float hh = imageHeight / 2;
 
-        float left = this.x - hw * IMAGE_RATIO;
-        float top = this.y - hh * IMAGE_RATIO;
-        float right = this.x + hw * IMAGE_RATIO;
-        float bottom = this.y + hh * IMAGE_RATIO;
+        float left = this.x - hw * GameView.MULTIPLIER;
+        float top = this.y - hh * GameView.MULTIPLIER;
+        float right = this.x + hw * GameView.MULTIPLIER;
+        float bottom = this.y + hh * GameView.MULTIPLIER;
 //        Rect srcRect = new Rect(0, 0, imageWidth, imageHeight);
         RectF dstRect = new RectF(left, top, right, bottom);
         canvas.drawBitmap(bitmap, null, dstRect, null);
