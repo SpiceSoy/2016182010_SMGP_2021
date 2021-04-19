@@ -5,9 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
+
 public class AnimationGameBitmap extends GameBitmap {
-    public static final int IMAGE_RATIO = 4;
-    private final Bitmap bitmap;
     private final int imageWidth;
     private final int imageHeight;
     private final int frameWidth;
@@ -18,7 +18,7 @@ public class AnimationGameBitmap extends GameBitmap {
 
 
     public AnimationGameBitmap(int resId, float frameRate, int frameCount) {
-        bitmap = GameBitmap.load(resId);
+        super(resId);
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
 
@@ -34,8 +34,8 @@ public class AnimationGameBitmap extends GameBitmap {
     }
 
     public void draw(Canvas canvas, float x, float y) {
-        int hw = (int) (frameWidth * 0.5 * IMAGE_RATIO);
-        int hh = (int) (frameHeight * 0.5 * IMAGE_RATIO);
+        int hw = (int) (frameWidth * 0.5 * GameView.MULTIPLIER);
+        int hh = (int) (frameHeight * 0.5 * GameView.MULTIPLIER);
 
         int elapsed = (int) (System.currentTimeMillis() - createdOn);
         int frameIndex = Math.round(elapsed * 0.001f * framePerSec) % frameCount;
@@ -51,11 +51,13 @@ public class AnimationGameBitmap extends GameBitmap {
         canvas.drawBitmap(bitmap, src, dst, null);
     }
 
+    @Override
     public int getWidth() {
-        return this.frameWidth * IMAGE_RATIO;
+        return this.frameWidth;
     }
 
+    @Override
     public int getHeight() {
-        return this.frameHeight * IMAGE_RATIO;
+        return this.frameHeight;
     }
 }
