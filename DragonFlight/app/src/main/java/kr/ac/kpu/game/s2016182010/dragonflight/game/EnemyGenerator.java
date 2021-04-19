@@ -31,9 +31,9 @@ public class EnemyGenerator implements GameObject {
         Log.d(TAG, "Generate Now !!");
 
         MainGame game = MainGame.get();
-        float sixth = GameView.instance.getWidth() / 6;
-        for (int i = 1; i <= 5; ++i) {
-            float x = sixth * i;
+        float tenth = GameView.instance.getWidth() / 10;
+        for (int i = 1; i <= 9; i+=2) {
+            float x = tenth * i;
             int y = 0;
             Enemy enemy = new Enemy(x, y, 700);
             game.add(enemy);
