@@ -58,7 +58,14 @@ public class MainGame {
     }
 
     public void add(GameObject gameObject) {
-        this.objects.add(gameObject);
+        GameView.instance.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        objects.add(gameObject);
+                    }
+                }
+        );
     }
 
     public void remove(GameObject gameObject) {
