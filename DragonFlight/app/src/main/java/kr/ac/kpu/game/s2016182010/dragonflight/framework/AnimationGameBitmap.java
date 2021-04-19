@@ -1,9 +1,7 @@
 package kr.ac.kpu.game.s2016182010.dragonflight.framework;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
@@ -15,6 +13,7 @@ public class AnimationGameBitmap extends GameBitmap {
     private final long createdOn;
     private final float framePerSec;
     private final int frameCount;
+    protected Rect srcRect = new Rect();
 
 
     public AnimationGameBitmap(int resId, float frameRate, int frameCount) {
@@ -40,15 +39,9 @@ public class AnimationGameBitmap extends GameBitmap {
         int elapsed = (int) (System.currentTimeMillis() - createdOn);
         int frameIndex = Math.round(elapsed * 0.001f * framePerSec) % frameCount;
 
-        Rect src = new Rect(
-                (frameWidth * frameIndex), 0, (frameWidth * (frameIndex + 1)), frameHeight
-        );
-        RectF dst = new RectF(
-                x - hw, y - hh, x + hw, y + hh
-        );
-
-
-        canvas.drawBitmap(bitmap, src, dst, null);
+        srcRect.set((frameWidth * frameIndex), 0, (frameWidth * (frameIndex + 1)), frameHeight);
+        dstRect.set(x - hw, y - hh, x + hw, y + hh);
+        canvas.drawBitmap(bitmap, srcRect, dstRect, null);
     }
 
     @Override
