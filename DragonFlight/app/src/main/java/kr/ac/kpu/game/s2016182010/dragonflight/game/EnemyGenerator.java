@@ -40,7 +40,7 @@ public class EnemyGenerator implements GameObject {
         for (int i = 1; i <= 9; i += 2) {
             float x = tenth * i;
             int y = 0;
-            int level = Math.max(0, Math.min(wave / 10 - r.nextInt(3), 20));
+            int level = Math.max(1, Math.min(wave / 10 - r.nextInt(3), 20));
             Enemy enemy = new Enemy(level, x, y, 700);
             game.add(enemy);
         }
