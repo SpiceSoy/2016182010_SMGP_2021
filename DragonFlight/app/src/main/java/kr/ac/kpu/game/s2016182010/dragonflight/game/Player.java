@@ -56,8 +56,8 @@ public class Player implements GameObject, BoxCollidable {
     }
 
     @Override
-    public RectF getBoundingRect() {
-        return this.bitmap.getBoundingRect(x, y);
+    public void getBoundingRect(RectF rect) {
+         this.bitmap.getBoundingRect(x, y, rect);
     }
 
     @Override

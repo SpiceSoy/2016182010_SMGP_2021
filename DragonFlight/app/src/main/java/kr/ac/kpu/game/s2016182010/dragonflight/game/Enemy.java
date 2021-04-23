@@ -6,7 +6,6 @@ import android.graphics.RectF;
 import kr.ac.kpu.game.s2016182010.dragonflight.R;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
-import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
@@ -36,10 +35,9 @@ public class Enemy implements GameObject, BoxCollidable {
     }
 
     @Override
-    public RectF getBoundingRect() {
-        return this.bitmap.getBoundingRect(x, y);
+    public void getBoundingRect(RectF rect) {
+        this.bitmap.getBoundingRect(x, y, rect);
     }
-
     @Override
     public void draw(Canvas canvas) {
         bitmap.draw(canvas, this.x, this.y);
