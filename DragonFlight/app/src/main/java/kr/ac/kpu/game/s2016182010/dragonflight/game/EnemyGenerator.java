@@ -9,12 +9,14 @@ import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
 public class EnemyGenerator implements GameObject {
-    public static final float INITIAL_SPAWN_INTERVAL = 5.0f;
+    public static final float INITIAL_SPAWN_INTERVAL = 2.0f;
     private static final String TAG = EnemyGenerator.class.getSimpleName();
+    private int wave;
     private float time;
     private float spawnInterval;
 
     public EnemyGenerator() {
+        this.wave = 0;
         this.spawnInterval = INITIAL_SPAWN_INTERVAL;
         this.time = INITIAL_SPAWN_INTERVAL;
     }
@@ -31,14 +33,14 @@ public class EnemyGenerator implements GameObject {
 
     private void generate() {
         Log.d(TAG, "Generate Now !!");
-
+        wave++;
         MainGame game = MainGame.get();
         float tenth = GameView.instance.getWidth() / 10;
-        for (int i = 1; i <= 9; i+=2) {
+        Random r = new Random();
+        for (int i = 1; i <= 9; i += 2) {
             float x = tenth * i;
             int y = 0;
-            Random r = new Random();
-            int level = r.nextInt(20) + 1;
+            int level = Math.max(0, Math.min(wave / 10 - r.nextInt(3), 20));
             Enemy enemy = new Enemy(level, x, y, 700);
             game.add(enemy);
         }
