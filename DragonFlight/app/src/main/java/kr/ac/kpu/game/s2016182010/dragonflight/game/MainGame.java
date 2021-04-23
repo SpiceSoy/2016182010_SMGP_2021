@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.dragonflight.framework.Recyclable;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 import kr.ac.kpu.game.s2016182010.dragonflight.utils.CollisionHelper;
 
@@ -26,6 +28,24 @@ public class MainGame {
     public float frameTime;
 
     private ArrayList<GameObject> objects = new ArrayList<>();
+
+    private static HashMap<Class, ArrayList<GameObject>> recyclePool = new HashMap<>();
+
+    public void recycle(GameObject object) {
+        Class clazz = object.getClass();
+        ArrayList<GameObject> array = recyclePool.get(clazz);
+        if (array == null) {
+            array = new ArrayList<>();
+            recyclePool.put(clazz, array);
+        }
+        array.add(object);
+    }
+
+    public GameObject get(Class clazz) {
+        ArrayList<GameObject> array = recyclePool.get(clazz);
+        if(array == null || array.isEmpty()) return null;
+        return array.remove(0);
+    }
 
     private boolean initialized = false;
 
@@ -48,31 +68,31 @@ public class MainGame {
             o.update();
         }
         for (GameObject o1 : objects) {
-            if(!(o1 instanceof Enemy)){
+            if (!(o1 instanceof Enemy)) {
                 continue;
             }
             Enemy enemy = (Enemy) o1;
             boolean removed = false;
-            for (GameObject o2 : objects){
-                if(!(o2 instanceof Bullet)){
+            for (GameObject o2 : objects) {
+                if (!(o2 instanceof Bullet)) {
                     continue;
                 }
                 Bullet bullet = (Bullet) o2;
-                if(CollisionHelper.collides(enemy, bullet)) {
+                if (CollisionHelper.collides(enemy, bullet)) {
 //                    Log.d(TAG, "Collision : " + o1 + " - " + o2);
                     remove(enemy);
                     remove(bullet);
-                    bullet.recycle();
+//                    bullet.recycle();
                     removed = true;
                     break;
                 }
             }
 
-            if(removed){
+            if (removed) {
                 continue;
             }
 
-            if(CollisionHelper.collides(enemy, player)) {
+            if (CollisionHelper.collides(enemy, player)) {
 //                Log.d(TAG, "Collision : Enemy - Player");
             }
         }
@@ -105,6 +125,11 @@ public class MainGame {
     }
 
     public void remove(GameObject gameObject) {
+        if(gameObject instanceof Recyclable) {
+            ((Recyclable) gameObject).recycle();
+            recycle(gameObject);
+        }
+
         GameView.instance.post(
                 new Runnable() {
                     @Override

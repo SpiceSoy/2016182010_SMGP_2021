@@ -11,8 +11,9 @@ import kr.ac.kpu.game.s2016182010.dragonflight.R;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.dragonflight.framework.Recyclable;
 
-public class Bullet implements GameObject, BoxCollidable {
+public class Bullet implements GameObject, BoxCollidable, Recyclable {
     private static final String TAG = Bullet.class.getSimpleName();
     private float x;
     private final GameBitmap bitmap;
@@ -31,13 +32,14 @@ public class Bullet implements GameObject, BoxCollidable {
         this.speed = speed;
     }
 
-    private static ArrayList<Bullet> recyclePool = new ArrayList<>();
+//    private static ArrayList<Bullet> recyclePool = new ArrayList<>();
 
-    public static Bullet getNewBullet(float x, float y, int speed) {
-        if (recyclePool.size() == 0) {
+    public static Bullet get(float x, float y, int speed) {
+        MainGame game = MainGame.get();
+        Bullet bullet = (Bullet) game.get(Bullet.class);
+        if(bullet == null) {
             return new Bullet(x, y, speed);
         }
-        Bullet bullet = recyclePool.remove(0);
         bullet.init(x, y, speed);
         return bullet;
     }
@@ -49,7 +51,6 @@ public class Bullet implements GameObject, BoxCollidable {
 
         if (y < 0 - this.bitmap.getHeight()) {
             game.remove(this);
-            this.recycle();
         }
     }
 
@@ -63,7 +64,12 @@ public class Bullet implements GameObject, BoxCollidable {
         this.bitmap.getBoundingRect(x, y, rect);
     }
 
+    @Override
     public void recycle() {
-        recyclePool.add(this);
+
     }
+
+//    public void recycle() {
+//        recyclePool.add(this);
+//    }
 }
