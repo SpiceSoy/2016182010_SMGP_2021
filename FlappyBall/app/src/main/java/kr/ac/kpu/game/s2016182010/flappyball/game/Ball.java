@@ -5,11 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import kr.ac.kpu.game.s2016182010.flappyball.framework.BoxCollide;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
 
-public class Ball implements GameObject {
+public class Ball implements GameObject, BoxCollide {
     private static final float GRAVITY_FORCE = 9.8f * 100 * 7;
     private static final float SHOOT_FORCE = 5.5f;
     private static final float IMAGE_RATIO = 3.0f;
@@ -57,5 +58,10 @@ public class Ball implements GameObject {
     @Override
     public void draw(Canvas canvas) {
         bitmap.draw(canvas, positionX, positionY);
+    }
+
+    @Override
+    public void getBoundingRect(RectF rect) {
+        bitmap.getBoundingRect(positionX, positionY, rect);
     }
 }
