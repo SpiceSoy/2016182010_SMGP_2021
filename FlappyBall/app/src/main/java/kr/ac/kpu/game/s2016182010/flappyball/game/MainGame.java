@@ -56,9 +56,8 @@ public class MainGame {
             if(!(o instanceof Block)) {
                 continue;
             } else{
-                if(CollisionHelper.collides(ball, (Block)o)){
-                    ball.onCollisionBlock();
-                }
+                CollisionHelper.COL_TYPE result = CollisionHelper.getCollideDirection(ball, (Block) o);
+                ball.onCollisionBlock(result);
             }
         }
     }

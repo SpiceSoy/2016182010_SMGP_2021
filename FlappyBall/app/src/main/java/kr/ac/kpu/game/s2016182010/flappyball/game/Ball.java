@@ -9,6 +9,7 @@ import kr.ac.kpu.game.s2016182010.flappyball.framework.BoxCollide;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
+import kr.ac.kpu.game.s2016182010.flappyball.utill.CollisionHelper;
 
 public class Ball implements GameObject, BoxCollide {
     private static final float GRAVITY_FORCE = 9.8f * 100 * 7;
@@ -21,6 +22,7 @@ public class Ball implements GameObject, BoxCollide {
 
 
     GameBitmap bitmap;
+
     Ball(int resId, float x, float y) {
         bitmap = new GameBitmap(resId);
         this.positionX = x;
@@ -31,17 +33,35 @@ public class Ball implements GameObject, BoxCollide {
     public void update() {
         MainGame game = MainGame.get();
         this.velocityY += GRAVITY_FORCE * game.frameTime;
-        this.positionX += this.velocityX * game.frameTime;
-        this.positionY += this.velocityY * game.frameTime;
-        if(this.positionY > GameView.instance.getHeight()){
+
+        if (this.positionY > GameView.instance.getHeight()) {
             this.velocityY = 0;
         }
-        this.positionX = Math.max(Math.min(this.positionX, GameView.instance.getWidth()),0);
-        this.positionY = Math.max(Math.min(this.positionY, GameView.instance.getHeight()),0);
+        move();
     }
 
-    public void onCollisionBlock() {
+    public void move() {
+        move(false);
+    }
+    public void move(boolean reverse) {
+        MainGame game = MainGame.get();
+        this.positionX += (reverse ? -1 : 1) * this.velocityX * game.frameTime;
+        this.positionY += (reverse ? -1 : 1) * this.velocityY * game.frameTime;
+    }
 
+    public void onCollisionBlock(CollisionHelper.COL_TYPE colType) {
+        switch (colType) {
+            case TOP:
+            case BOTTOM:
+                move(true);
+                velocityY *= -1.0f;
+                break;
+            case LEFT:
+            case RIGHT:
+                move(true);
+                velocityX *= -1.0f;
+                break;
+        }
     }
 
     public void shoot(float startX, float startY, float endX, float endY) {
