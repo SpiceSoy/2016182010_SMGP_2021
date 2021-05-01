@@ -34,11 +34,11 @@ public class Ball implements GameObject, BoxCollide {
     public void update() {
         MainGame game = MainGame.get();
         this.velocityY += GRAVITY_FORCE * game.frameTime;
+        move();
 
         if (this.positionY > GameView.instance.getHeight()) {
-            this.velocityY = 0;
+            this.onCollisionBlock(CollisionHelper.COL_TYPE.TOP);
         }
-        move();
     }
 
     public void move() {
@@ -55,12 +55,14 @@ public class Ball implements GameObject, BoxCollide {
             case TOP:
             case BOTTOM:
                 move(true);
+                velocityX *= +ELASTICITY;
                 velocityY *= -ELASTICITY;
                 break;
             case LEFT:
             case RIGHT:
                 move(true);
                 velocityX *= -ELASTICITY;
+                velocityY *= +ELASTICITY;
                 break;
         }
     }
@@ -71,9 +73,17 @@ public class Ball implements GameObject, BoxCollide {
 //        float length = (float) Math.sqrt(dx*dx + dy*dy);
 //        float ndx = dx / length;
 //        float ndy = dy / length;
-        this.velocityX += dx * SHOOT_FORCE;
-        this.velocityY += dy * SHOOT_FORCE;
+        this.velocityX = dx * SHOOT_FORCE;
+        this.velocityY = dy * SHOOT_FORCE;
 
+    }
+
+    public float getPositionX() {
+        return positionX;
+    }
+
+    public float getPositionY() {
+        return positionY;
     }
 
     @Override
