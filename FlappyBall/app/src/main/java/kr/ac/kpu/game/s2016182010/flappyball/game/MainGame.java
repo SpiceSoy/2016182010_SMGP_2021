@@ -43,7 +43,9 @@ public class MainGame {
         objects.add(ball);
         objects.add(blockManager);
 
-        blockManager.addBlockSet(w* 0.9f, h * 0.2f, 200 * GameView.MULTIPLIER);
+        for(int i = 0; i < 100; i++) {
+            blockManager.addRandomBlockSet(w* 0.9f + i * w * 1.0f);
+        }
         initialized = true;
         return true;
     }

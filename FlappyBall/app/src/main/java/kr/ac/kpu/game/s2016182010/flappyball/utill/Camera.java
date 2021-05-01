@@ -16,4 +16,11 @@ public class Camera {
     public void endCamera(Canvas canvas) {
         canvas.restore();
     }
+
+    public float getRight() {
+        return lastPositionX + (GameView.instance.getWidth() * 0.5f);
+    }
+    public float getLeft() {
+        return lastPositionX - (GameView.instance.getWidth() * 0.5f);
+    }
 }
