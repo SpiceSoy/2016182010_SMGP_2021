@@ -16,6 +16,7 @@ import kr.ac.kpu.game.s2016182010.flappyball.game.MainGame;
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
     public static GameView instance;
+    public static final float MULTIPLIER = 2;
     private long lastFrame;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
