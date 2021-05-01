@@ -42,11 +42,16 @@ public class Block implements GameObject, BoxCollide {
 
     @Override
     public void draw(Canvas canvas) {
-        this.bitmap.draw(canvas, x, y);
+        this.bitmap.draw(canvas, x, getRectCenterY());
     }
 
     @Override
     public void getBoundingRect(RectF rect) {
-        this.bitmap.getBoundingRect(this.x, this.y, rect);
+        this.bitmap.getBoundingRect(x, getRectCenterY(), rect);
+    }
+
+    private float getRectCenterY() {
+        float hh = (this.blockPosition == BLOCK_POSITION.TOP ? 0.5f : -0.5f) * this.bitmap.getHeight();
+        return this.y + hh;
     }
 }

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import kr.ac.kpu.game.s2016182010.flappyball.R;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
+import kr.ac.kpu.game.s2016182010.flappyball.utill.CollisionHelper;
 
 public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
     static MainGame instance;
     private Ball ball;
-    private Block block;
 
     public static MainGame get() {
         if (instance == null) {
@@ -37,9 +37,11 @@ public class MainGame {
 
 //        player = new Player(w / 2, h - 300, 0, 0);
         ball = new Ball(R.mipmap.bird1_1, w/2, h/2);
-        block = new Block(Block.BLOCK_POSITION.BOTTOM, Block.BLOCK_TYPE.NORMAL, w/2, 0);
+        Block block1 = new Block(Block.BLOCK_POSITION.BOTTOM, Block.BLOCK_TYPE.NORMAL, w/2, h);
+        Block block2 = new Block(Block.BLOCK_POSITION.TOP, Block.BLOCK_TYPE.NORMAL, w/2, 0);
         objects.add(ball);
-        objects.add(block);
+        objects.add(block1);
+        objects.add(block2);
         initialized = true;
         return true;
     }
@@ -48,6 +50,16 @@ public class MainGame {
 //        if(!initialized) return;  //현재는 무의미
         for (GameObject o : objects) {
             o.update();
+        }
+
+        for (GameObject o : objects) {
+            if(!(o instanceof Block)) {
+                continue;
+            } else{
+                if(CollisionHelper.collides(ball, (Block)o)){
+                    ball.onCollisionBlock();
+                }
+            }
         }
     }
 
