@@ -32,22 +32,22 @@ public class GameBitmap {
         bitmap = load(resId);
     }
 
-    public int getWidth() {
-        return bitmap.getWidth();
+    public float getWidth() {
+        return bitmap.getWidth() * GameView.MULTIPLIER;
     }
 
-    public int getHeight() {
-        return bitmap.getHeight();
+    public float getHeight() {
+        return bitmap.getHeight() * GameView.MULTIPLIER;
     }
 
     public void getBoundingRect(float x, float y, RectF rect){
         float hw = this.getWidth() / 2;
         float hh = this.getHeight() / 2;
 
-        float left = x - hw * GameView.MULTIPLIER;
-        float top = y - hh * GameView.MULTIPLIER;
-        float right = x + hw * GameView.MULTIPLIER;
-        float bottom = y + hh * GameView.MULTIPLIER;
+        float left = x - hw;
+        float top = y - hh;
+        float right = x + hw;
+        float bottom = y + hh;
         rect.set(left, top, right, bottom);
     }
 
@@ -55,10 +55,10 @@ public class GameBitmap {
         float hw = this.getWidth() / 2;
         float hh = this.getHeight() / 2;
 
-        float left = x - hw * GameView.MULTIPLIER;
-        float top = y - hh * GameView.MULTIPLIER;
-        float right = x + hw * GameView.MULTIPLIER;
-        float bottom = y + hh * GameView.MULTIPLIER;
+        float left = x - hw;
+        float top = y - hh;
+        float right = x + hw;
+        float bottom = y + hh;
         dstRect.set(left, top, right, bottom);
         canvas.drawBitmap(bitmap, null, dstRect, null);
     }

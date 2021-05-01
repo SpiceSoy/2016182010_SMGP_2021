@@ -45,12 +45,12 @@ public class AnimationGameBitmap extends GameBitmap {
     }
 
     @Override
-    public int getWidth() {
+    public float getWidth() {
         return this.frameWidth;
     }
 
     @Override
-    public int getHeight() {
+    public float getHeight() {
         return this.frameHeight;
     }
 }
