@@ -16,6 +16,7 @@ public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
     static MainGame instance;
     private Ball ball;
+    private BlockManager blockManager;
 
     public static MainGame get() {
         if (instance == null) {
@@ -38,11 +39,11 @@ public class MainGame {
 
 //        player = new Player(w / 2, h - 300, 0, 0);
         ball = new Ball(R.mipmap.bird1_1, w/2, h/2);
-        Block block1 = new Block(Block.BLOCK_POSITION.BOTTOM, Block.BLOCK_TYPE.NORMAL, w/2, h);
-        Block block2 = new Block(Block.BLOCK_POSITION.TOP, Block.BLOCK_TYPE.NORMAL, w/2, 0);
+        blockManager = new BlockManager();
         objects.add(ball);
-        objects.add(block1);
-        objects.add(block2);
+        objects.add(blockManager);
+
+        blockManager.addBlockSet(w* 0.9f, h * 0.2f, 200 * GameView.MULTIPLIER);
         initialized = true;
         return true;
     }

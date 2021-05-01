@@ -13,8 +13,8 @@ public class Block implements GameObject, BoxCollide {
 
     private final BLOCK_POSITION blockPosition;
     private final BLOCK_TYPE blockType;
-    private final float x;
-    private final float y;
+    private float x;
+    private float y;
     RectF dstRect = new RectF();
     GameBitmap bitmap;
 
@@ -22,6 +22,7 @@ public class Block implements GameObject, BoxCollide {
         TOP,
         BOTTOM,
     }
+
     enum BLOCK_TYPE {
         NORMAL
     }
@@ -53,5 +54,26 @@ public class Block implements GameObject, BoxCollide {
     private float getRectCenterY() {
         float hh = (this.blockPosition == BLOCK_POSITION.TOP ? 0.5f : -0.5f) * this.bitmap.getHeight();
         return this.y + hh;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+    public float getWidth() {
+        return bitmap.getWidth();
+    }
+    public float getHeight() {
+        return bitmap.getHeight();
     }
 }
