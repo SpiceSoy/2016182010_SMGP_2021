@@ -14,6 +14,7 @@ import kr.ac.kpu.game.s2016182010.flappyball.utill.CollisionHelper;
 public class Ball implements GameObject, BoxCollide {
     private static final float GRAVITY_FORCE = 9.8f * 100 * 7;
     private static final float SHOOT_FORCE = 5.5f;
+    private static final float ELASTICITY = 0.7f;
     private static final float IMAGE_RATIO = 3.0f;
     private float positionX;
     private float positionY;
@@ -54,12 +55,12 @@ public class Ball implements GameObject, BoxCollide {
             case TOP:
             case BOTTOM:
                 move(true);
-                velocityY *= -1.0f;
+                velocityY *= -ELASTICITY;
                 break;
             case LEFT:
             case RIGHT:
                 move(true);
-                velocityX *= -1.0f;
+                velocityX *= -ELASTICITY;
                 break;
         }
     }
