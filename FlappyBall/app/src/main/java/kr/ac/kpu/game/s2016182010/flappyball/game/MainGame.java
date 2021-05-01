@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import kr.ac.kpu.game.s2016182010.flappyball.R;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
+import kr.ac.kpu.game.s2016182010.flappyball.utill.Camera;
 import kr.ac.kpu.game.s2016182010.flappyball.utill.CollisionHelper;
 
 public class MainGame {
@@ -62,11 +63,13 @@ public class MainGame {
         }
     }
 
+    Camera camera = new Camera();
     public void draw(Canvas canvas) {
-//        if(!initialized) return;  //현재는 무의미
+        camera.startCamera(ball.getPositionX(), canvas);
         for (GameObject o : objects) {
             o.draw(canvas);
         }
+        camera.endCamera(canvas);
     }
 
     float touchStartX;
