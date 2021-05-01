@@ -19,13 +19,9 @@ public class Ball implements GameObject {
     private float velocityY;
 
 
-    Bitmap bitmap;
-    Rect srcRect;
-    RectF dstRect = new RectF();
-
-
+    GameBitmap bitmap;
     Ball(int resId, float x, float y) {
-        bitmap = GameBitmap.load(resId);
+        bitmap = new GameBitmap(resId);
         this.positionX = x;
         this.positionY = y;
     }
@@ -60,13 +56,6 @@ public class Ball implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        float hw = bitmap.getWidth() * 0.5f * IMAGE_RATIO;
-        float hh = bitmap.getHeight() * 0.5f * IMAGE_RATIO;
-        float l = this.positionX - hw;
-        float r = this.positionX + hw;
-        float t = this.positionY - hh;
-        float b = this.positionY + hh;
-        dstRect.set(l,t,r,b);
-        canvas.drawBitmap(bitmap, null, dstRect, null );
+        bitmap.draw(canvas, positionX, positionY);
     }
 }
