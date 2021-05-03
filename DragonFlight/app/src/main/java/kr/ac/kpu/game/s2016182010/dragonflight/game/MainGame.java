@@ -1,13 +1,11 @@
 package kr.ac.kpu.game.s2016182010.dragonflight.game;
 
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.Recyclable;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
@@ -17,6 +15,7 @@ public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
     static MainGame instance;
     private Player player;
+    private Score score;
 
     public static MainGame get() {
         if (instance == null) {
@@ -55,6 +54,7 @@ public class MainGame {
         bullet,
         player,
         controller,
+        ui,
         LAYER_COUNT
     }
     public boolean initResources() {
@@ -66,8 +66,13 @@ public class MainGame {
         
         player = new Player(w / 2, h - 300);
         add(Layer.player, player);
-
         add(Layer.controller, new EnemyGenerator());
+
+        int margin = (int) (40 * GameView.MULTIPLIER);
+
+        score = new Score((int)w - margin, margin);
+        score.setScore(123459);
+        add(Layer.ui, score);
 
         initialized = true;
         return true;
