@@ -15,6 +15,7 @@ public class Score implements GameObject {
     private final int right;
     private final int top;
     private int score;
+    private int displayScore;
 
     public Score(int right, int top) {
         bitmap = GameBitmap.load(R.mipmap.number_24x32);
@@ -25,12 +26,14 @@ public class Score implements GameObject {
 
     @Override
     public void update() {
-
+        if(displayScore < score) {
+            displayScore += 1;
+        }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        int value = this.score;
+        int value = this.displayScore;
         int nw = bitmap.getWidth() / 10;
         int nh = bitmap.getHeight();
         int x = right;
@@ -50,9 +53,10 @@ public class Score implements GameObject {
 
     public void setScore(int score) {
         this.score = score;
+        this.displayScore = score;
     }
 
-    public void addScore(int i) {
-        this.score += i;
+    public void addScore(int amount) {
+        this.score += amount;
     }
 }
