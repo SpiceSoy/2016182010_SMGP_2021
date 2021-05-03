@@ -51,4 +51,8 @@ public class Score implements GameObject {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public void addScore(int i) {
+        this.score += i;
+    }
 }
