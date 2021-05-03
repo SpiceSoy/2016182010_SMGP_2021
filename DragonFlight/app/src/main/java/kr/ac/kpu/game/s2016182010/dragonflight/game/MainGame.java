@@ -27,7 +27,7 @@ public class MainGame {
 
     public float frameTime;
 
-    private ArrayList<GameObject> objects = new ArrayList<>();
+    private ArrayList<ArrayList<GameObject>> layers;
 
     private static HashMap<Class, ArrayList<GameObject>> recyclePool = new HashMap<>();
 
@@ -49,58 +49,99 @@ public class MainGame {
 
     private boolean initialized = false;
 
+
+    public enum Layer {
+        enemy,
+        bullet,
+        player,
+        controller,
+        LAYER_COUNT
+    }
     public boolean initResources() {
         if (initialized) return false;
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
 
+        initLayers(Layer.LAYER_COUNT.ordinal());
+        
         player = new Player(w / 2, h - 300);
-        objects.add(player);
+        add(Layer.player, player);
 
-        objects.add(new EnemyGenerator());
+        add(Layer.controller, new EnemyGenerator());
 
         initialized = true;
         return true;
     }
 
-    public void update() {
-        for (GameObject o : objects) {
-            o.update();
-        }
-        for (GameObject o1 : objects) {
-            if (!(o1 instanceof Enemy)) {
-                continue;
-            }
-            Enemy enemy = (Enemy) o1;
-            boolean removed = false;
-            for (GameObject o2 : objects) {
-                if (!(o2 instanceof Bullet)) {
-                    continue;
-                }
-                Bullet bullet = (Bullet) o2;
-                if (CollisionHelper.collides(enemy, bullet)) {
-//                    Log.d(TAG, "Collision : " + o1 + " - " + o2);
-                    remove(enemy);
-                    remove(bullet);
-//                    bullet.recycle();
-                    removed = true;
-                    break;
-                }
-            }
-
-            if (removed) {
-                continue;
-            }
-
-            if (CollisionHelper.collides(enemy, player)) {
-//                Log.d(TAG, "Collision : Enemy - Player");
-            }
+    private void initLayers(int layerCount) {
+        layers = new ArrayList<>();
+        for (int i = 0; i < layerCount; i++) {
+            layers.add(new ArrayList<>());
         }
     }
 
+    public void update() {
+        for (ArrayList<GameObject> objects : layers) {
+            for (GameObject o : objects) {
+                o.update();
+            }
+        }
+
+        ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
+        ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
+
+        for (GameObject o1 : enemies) {
+            Enemy enemy = (Enemy) o1;
+            boolean collided = false;
+            for(GameObject o2 : bullets){
+                Bullet bullet = (Bullet) o2;
+                if (CollisionHelper.collides(enemy, bullet)) {
+                    remove(enemy);
+                    remove(bullet);
+                    collided = true;
+                    break;
+                }
+            }
+            if(collided) {
+                break;
+            }
+        }
+//        for (GameObject o1 : objects) {
+//            if (!(o1 instanceof Enemy)) {
+//                continue;
+//            }
+//            Enemy enemy = (Enemy) o1;
+//            boolean removed = false;
+//            for (GameObject o2 : objects) {
+//                if (!(o2 instanceof Bullet)) {
+//                    continue;
+//                }
+//                Bullet bullet = (Bullet) o2;
+//                if (CollisionHelper.collides(enemy, bullet)) {
+////                    Log.d(TAG, "Collision : " + o1 + " - " + o2);
+//                    remove(enemy);
+//                    remove(bullet);
+////                    bullet.recycle();
+//                    removed = true;
+//                    break;
+//                }
+//            }
+//
+//            if (removed) {
+//                continue;
+//            }
+//
+//            if (CollisionHelper.collides(enemy, player)) {
+////                Log.d(TAG, "Collision : Enemy - Player");
+//            }
+//        }
+    }
+
     public void draw(Canvas canvas) {
-        for (GameObject o : objects) {
-            o.draw(canvas);
+        for (ArrayList<GameObject> objects : layers) {
+            for (GameObject o : objects) {
+                o.draw(canvas);
+            }
         }
     }
 
@@ -113,11 +154,12 @@ public class MainGame {
         return false;
     }
 
-    public void add(GameObject gameObject) {
+    public void add(Layer layer, GameObject gameObject) {
         GameView.instance.post(
                 new Runnable() {
                     @Override
                     public void run() {
+                        ArrayList<GameObject> objects = layers.get(layer.ordinal());
                         objects.add(gameObject);
                     }
                 }
@@ -134,7 +176,12 @@ public class MainGame {
                 new Runnable() {
                     @Override
                     public void run() {
-                        objects.remove(gameObject);
+                        for(ArrayList<GameObject> objects : layers) {
+                            boolean removed =  objects.remove(gameObject);
+                            if(removed){
+                                break;
+                            }
+                        }
                     }
                 }
         );

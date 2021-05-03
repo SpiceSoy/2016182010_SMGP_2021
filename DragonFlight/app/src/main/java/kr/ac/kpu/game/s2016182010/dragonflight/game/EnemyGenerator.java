@@ -42,7 +42,7 @@ public class EnemyGenerator implements GameObject {
             int y = 0;
             int level = Math.max(1, Math.min(wave / 10 - r.nextInt(3), 20));
             Enemy enemy = Enemy.get(level, x, y, 700);
-            game.add(enemy);
+            game.add(MainGame.Layer.enemy, enemy);
         }
     }
 
