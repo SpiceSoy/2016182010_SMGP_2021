@@ -2,20 +2,23 @@ package kr.ac.kpu.game.s2016182010.dragonflight.game;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.kpu.game.s2016182010.dragonflight.R;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.dragonflight.framework.Recyclable;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
-public class Enemy implements GameObject, BoxCollidable {
+public class Enemy implements GameObject, BoxCollidable, Recyclable {
     private static final float FRAMES_PER_SECOND = 8;
-    private final float x;
-    private final AnimationGameBitmap bitmap;
+    private static final String TAG = Enemy.class.getSimpleName();
+    private float x;
+    private AnimationGameBitmap bitmap;
     private float y;
-    private final int level;
-    private final int speed;
+    private int level;
+    private int speed;
 
     private static final int RESOURCE_IDS[] = {
             R.mipmap.enemy_01,R.mipmap.enemy_02,R.mipmap.enemy_03,R.mipmap.enemy_04,R.mipmap.enemy_05,
@@ -24,7 +27,21 @@ public class Enemy implements GameObject, BoxCollidable {
             R.mipmap.enemy_16,R.mipmap.enemy_17,R.mipmap.enemy_18,R.mipmap.enemy_19,R.mipmap.enemy_20
     };
 
-    public Enemy(int level, float x, float y, int speed) {
+    private Enemy() {
+        Log.d(TAG, "Enemy Contructor");
+    }
+
+    public static Enemy get(int level, float x, int y, int i) {
+        MainGame game = MainGame.get();
+        Enemy enemy = (Enemy) game.get(Enemy.class);
+        if(enemy == null) {
+            enemy = new Enemy();
+        }
+        enemy.init(level, x, y, i);
+        return enemy;
+    }
+
+    public void init(int level, float x, float y, int speed) {
         this.level = level;
         this.x = x;
         this.y = y;
@@ -50,5 +67,10 @@ public class Enemy implements GameObject, BoxCollidable {
     @Override
     public void draw(Canvas canvas) {
         bitmap.draw(canvas, this.x, this.y);
+    }
+
+    @Override
+    public void recycle() {
+        // 현재는 할 일 없음
     }
 }
