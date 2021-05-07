@@ -85,6 +85,7 @@ public class GameView extends View {
     public void resumeGame() {
         if(!running) {
             running = true;
+            lastFrame = 0;
             requestCallback();
         }
     }
