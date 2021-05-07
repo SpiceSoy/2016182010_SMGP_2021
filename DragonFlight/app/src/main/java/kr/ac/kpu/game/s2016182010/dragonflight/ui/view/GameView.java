@@ -16,7 +16,7 @@ import kr.ac.kpu.game.s2016182010.dragonflight.game.MainGame;
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
     public static GameView instance;
-    public static final float MULTIPLIER = 2;
+    public static float MULTIPLIER = 2;
     private long lastFrame;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
@@ -55,6 +55,10 @@ public class GameView extends View {
     }
 
     private void requestCallback() {
+        if(!isShown()) {
+            Log.d(TAG, "Not shown, Not Calling Choreographer.getInstance().postFrameCallback");
+            return;
+        }
         Choreographer.getInstance().postFrameCallback(
                 new Choreographer.FrameCallback() {
                     @Override

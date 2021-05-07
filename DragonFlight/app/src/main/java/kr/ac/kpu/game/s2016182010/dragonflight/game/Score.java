@@ -16,6 +16,8 @@ public class Score implements GameObject {
     private final int top;
     private int score;
     private int displayScore;
+    private Rect scoreSrc = new Rect();
+    private RectF scoreDst = new RectF();
 
     public Score(int right, int top) {
         bitmap = GameBitmap.load(R.mipmap.number_24x32);
@@ -39,13 +41,12 @@ public class Score implements GameObject {
         int x = right;
         float dw = nw * GameView.MULTIPLIER;
         float dh = nh * GameView.MULTIPLIER;
-        Rect src = new Rect();
-        RectF dst = new RectF();
+
         while(value > 0) {
             int digit = value % 10;
-            src.set(digit * nw, 0, (digit + 1) * nw, nh);
-            dst.set(x, top, x + dw, top + dh);
-            canvas.drawBitmap(bitmap, src, dst, null);
+            scoreSrc.set(digit * nw, 0, (digit + 1) * nw, nh);
+            scoreDst.set(x, top, x + dw, top + dh);
+            canvas.drawBitmap(bitmap, scoreSrc, scoreDst, null);
             x -= dw;
             value /= 10;
         }

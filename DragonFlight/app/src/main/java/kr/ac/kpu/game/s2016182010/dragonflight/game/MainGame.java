@@ -101,8 +101,8 @@ public class MainGame {
             for(GameObject o2 : bullets){
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
-                    remove(enemy);
-                    remove(bullet);
+                    remove(enemy, false);
+                    remove(bullet, false);
                     score.addScore(10);
                     collided = true;
                     break;
@@ -112,35 +112,6 @@ public class MainGame {
                 break;
             }
         }
-//        for (GameObject o1 : objects) {
-//            if (!(o1 instanceof Enemy)) {
-//                continue;
-//            }
-//            Enemy enemy = (Enemy) o1;
-//            boolean removed = false;
-//            for (GameObject o2 : objects) {
-//                if (!(o2 instanceof Bullet)) {
-//                    continue;
-//                }
-//                Bullet bullet = (Bullet) o2;
-//                if (CollisionHelper.collides(enemy, bullet)) {
-////                    Log.d(TAG, "Collision : " + o1 + " - " + o2);
-//                    remove(enemy);
-//                    remove(bullet);
-////                    bullet.recycle();
-//                    removed = true;
-//                    break;
-//                }
-//            }
-//
-//            if (removed) {
-//                continue;
-//            }
-//
-//            if (CollisionHelper.collides(enemy, player)) {
-////                Log.d(TAG, "Collision : Enemy - Player");
-//            }
-//        }
     }
 
     public void draw(Canvas canvas) {
@@ -173,23 +144,29 @@ public class MainGame {
     }
 
     public void remove(GameObject gameObject) {
-        if(gameObject instanceof Recyclable) {
-            ((Recyclable) gameObject).recycle();
-            recycle(gameObject);
-        }
-
-        GameView.instance.post(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        for(ArrayList<GameObject> objects : layers) {
-                            boolean removed =  objects.remove(gameObject);
-                            if(removed){
-                                break;
-                            }
+        remove(gameObject, true);
+    }
+    public void remove(GameObject gameObject, boolean delayed) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                for(ArrayList<GameObject> objects : layers) {
+                    boolean removed =  objects.remove(gameObject);
+                    if(removed){
+                        if(gameObject instanceof Recyclable) {
+                            ((Recyclable) gameObject).recycle();
+                            recycle(gameObject);
                         }
+                        break;
                     }
                 }
-        );
+            }
+        };
+
+        if(delayed) {
+            GameView.instance.post(runnable);
+        } else {
+            runnable.run();
+        }
     }
 }
