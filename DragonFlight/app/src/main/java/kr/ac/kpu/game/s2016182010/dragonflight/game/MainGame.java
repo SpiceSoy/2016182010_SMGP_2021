@@ -78,10 +78,10 @@ public class MainGame {
         score.setScore(0);
         add(Layer.ui, score);
 
-        ImageObject bg = new ImageObject(R.mipmap.bg_city, w / 2, h / 2);
+        VerticalScrollBackground bg = new VerticalScrollBackground(R.mipmap.bg_city, 10);
         add(Layer.bg_1, bg);
 
-        ImageObject clouds = new ImageObject(R.mipmap.clouds, w / 2, h / 2);
+        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);
         add(Layer.bg_2, clouds);
 
         initialized = true;
