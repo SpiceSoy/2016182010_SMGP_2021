@@ -23,4 +23,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Density: " + metrics.density + " DPI:" + metrics.densityDpi);
         GameView.MULTIPLIER = metrics.density * 0.762f;
     }
+
+    @Override
+    protected void onPause() {
+        GameView.instance.pauseGame();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        GameView.instance.resumeGame();
+        super.onResume();
+    }
 }

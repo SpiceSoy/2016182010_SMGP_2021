@@ -17,12 +17,14 @@ public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
     public static GameView instance;
     public static float MULTIPLIER = 2;
+    private boolean running;
     private long lastFrame;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         GameView.instance = this;
         Sound.init(context);
+        running = true;
     }
 
     private void update() {
@@ -55,8 +57,8 @@ public class GameView extends View {
     }
 
     private void requestCallback() {
-        if(!isShown()) {
-            Log.d(TAG, "Not shown, Not Calling Choreographer.getInstance().postFrameCallback");
+        if(!running) {
+            Log.d(TAG, "Not running, Not Calling Choreographer.getInstance().postFrameCallback");
             return;
         }
         Choreographer.getInstance().postFrameCallback(
@@ -74,5 +76,16 @@ public class GameView extends View {
                     }
                 }
         );
+    }
+
+    public void pauseGame() {
+        running = false;
+    }
+
+    public void resumeGame() {
+        if(!running) {
+            running = true;
+            requestCallback();
+        }
     }
 }
