@@ -51,11 +51,12 @@ public class MainGame {
 
 
     public enum Layer {
-        bg,
+        bg_1,
         enemy,
         bullet,
         player,
         controller,
+        bg_2,
         ui,
         LAYER_COUNT
     }
@@ -78,10 +79,10 @@ public class MainGame {
         add(Layer.ui, score);
 
         ImageObject bg = new ImageObject(R.mipmap.bg_city, w / 2, h / 2);
-        add(Layer.bg, bg);
+        add(Layer.bg_1, bg);
 
         ImageObject clouds = new ImageObject(R.mipmap.clouds, w / 2, h / 2);
-        add(Layer.bg, clouds);
+        add(Layer.bg_2, clouds);
 
         initialized = true;
         return true;
