@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import kr.ac.kpu.game.s2016182010.dragonflight.R;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.dragonflight.framework.Recyclable;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
@@ -42,7 +43,7 @@ public class MainGame {
 
     public GameObject get(Class clazz) {
         ArrayList<GameObject> array = recyclePool.get(clazz);
-        if(array == null || array.isEmpty()) return null;
+        if (array == null || array.isEmpty()) return null;
         return array.remove(0);
     }
 
@@ -50,6 +51,7 @@ public class MainGame {
 
 
     public enum Layer {
+        bg,
         enemy,
         bullet,
         player,
@@ -57,22 +59,29 @@ public class MainGame {
         ui,
         LAYER_COUNT
     }
+
     public boolean initResources() {
         if (initialized) return false;
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
 
         initLayers(Layer.LAYER_COUNT.ordinal());
-        
+
         player = new Player(w / 2, h - 300);
         add(Layer.player, player);
         add(Layer.controller, new EnemyGenerator());
 
         int margin = (int) (40 * GameView.MULTIPLIER);
 
-        score = new Score((int)w - margin, margin);
+        score = new Score((int) w - margin, margin);
         score.setScore(0);
         add(Layer.ui, score);
+
+        ImageObject bg = new ImageObject(R.mipmap.bg_city, w / 2, h / 2);
+        add(Layer.bg, bg);
+
+        ImageObject clouds = new ImageObject(R.mipmap.clouds, w / 2, h / 2);
+        add(Layer.bg, clouds);
 
         initialized = true;
         return true;
@@ -98,7 +107,7 @@ public class MainGame {
         for (GameObject o1 : enemies) {
             Enemy enemy = (Enemy) o1;
             boolean collided = false;
-            for(GameObject o2 : bullets){
+            for (GameObject o2 : bullets) {
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
                     remove(enemy, false);
@@ -108,7 +117,7 @@ public class MainGame {
                     break;
                 }
             }
-            if(collided) {
+            if (collided) {
                 break;
             }
         }
@@ -146,14 +155,15 @@ public class MainGame {
     public void remove(GameObject gameObject) {
         remove(gameObject, true);
     }
+
     public void remove(GameObject gameObject, boolean delayed) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                for(ArrayList<GameObject> objects : layers) {
-                    boolean removed =  objects.remove(gameObject);
-                    if(removed){
-                        if(gameObject instanceof Recyclable) {
+                for (ArrayList<GameObject> objects : layers) {
+                    boolean removed = objects.remove(gameObject);
+                    if (removed) {
+                        if (gameObject instanceof Recyclable) {
                             ((Recyclable) gameObject).recycle();
                             recycle(gameObject);
                         }
@@ -163,7 +173,7 @@ public class MainGame {
             }
         };
 
-        if(delayed) {
+        if (delayed) {
             GameView.instance.post(runnable);
         } else {
             runnable.run();
