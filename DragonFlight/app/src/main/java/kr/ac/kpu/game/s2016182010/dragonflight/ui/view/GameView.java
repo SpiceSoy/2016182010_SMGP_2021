@@ -15,14 +15,14 @@ import kr.ac.kpu.game.s2016182010.dragonflight.game.MainGame;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
-    public static GameView instance;
+    public static GameView view;
     public static float MULTIPLIER = 2;
     private boolean running;
     private long lastFrame;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        GameView.instance = this;
+        GameView.view = this;
         Sound.init(context);
         running = true;
     }

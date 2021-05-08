@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kr.ac.kpu.game.s2016182010.dragonflight.R;
-import kr.ac.kpu.game.s2016182010.dragonflight.game.MainGame;
 import kr.ac.kpu.game.s2016182010.dragonflight.ui.view.GameView;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        GameView.instance.pauseGame();
+        GameView.view.pauseGame();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        GameView.instance.resumeGame();
+        GameView.view.resumeGame();
         super.onResume();
     }
 }

@@ -20,7 +20,7 @@ public class GameBitmap {
         } else {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inScaled = false;
-            Resources res = GameView.instance.getResources();
+            Resources res = GameView.view.getResources();
             bitmap = BitmapFactory.decodeResource(res, resId, options);
             bitmaps.put(resId, bitmap);
         }

@@ -63,8 +63,8 @@ public class MainGame {
 
     public boolean initResources() {
         if (initialized) return false;
-        float w = GameView.instance.getWidth();
-        float h = GameView.instance.getHeight();
+        float w = GameView.view.getWidth();
+        float h = GameView.view.getHeight();
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
@@ -78,10 +78,10 @@ public class MainGame {
         score.setScore(0);
         add(Layer.ui, score);
 
-        VerticalScrollBackground bg = new VerticalScrollBackground(R.mipmap.bg_city, 10);
+        HorizontalScrollBackground bg = new HorizontalScrollBackground(R.mipmap.bg_city, 10);
         add(Layer.bg_1, bg);
 
-        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);
+        HorizontalScrollBackground clouds = new HorizontalScrollBackground(R.mipmap.clouds, 20);
         add(Layer.bg_2, clouds);
 
         initialized = true;
@@ -142,7 +142,7 @@ public class MainGame {
     }
 
     public void add(Layer layer, GameObject gameObject) {
-        GameView.instance.post(
+        GameView.view.post(
                 new Runnable() {
                     @Override
                     public void run() {
@@ -175,7 +175,7 @@ public class MainGame {
         };
 
         if (delayed) {
-            GameView.instance.post(runnable);
+            GameView.view.post(runnable);
         } else {
             runnable.run();
         }

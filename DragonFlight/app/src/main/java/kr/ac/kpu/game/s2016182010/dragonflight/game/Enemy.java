@@ -55,7 +55,7 @@ public class Enemy implements GameObject, BoxCollidable, Recyclable {
         MainGame game = MainGame.get();
         y += speed * game.frameTime;
 
-        if(y > GameView.instance.getHeight()) {
+        if(y > GameView.view.getHeight()) {
             game.remove(this);
         }
     }
