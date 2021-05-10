@@ -12,7 +12,7 @@ public class AnimationGameBitmap extends GameBitmap {
     protected int frameHeight;
     protected final long createdOn;
     protected final float framePerSec;
-    protected final int frameCount;
+    protected int frameCount;
     protected Rect srcRect = new Rect();
 
 

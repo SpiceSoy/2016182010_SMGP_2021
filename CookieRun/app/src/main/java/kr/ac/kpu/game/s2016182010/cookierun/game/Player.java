@@ -4,9 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.cookierun.R;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.BoxCollidable;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.IndexedAnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.MainGame;
@@ -29,7 +27,7 @@ public class Player implements GameObject, BoxCollidable {
         this.y = y;
         this.tx = x;
         this.fireTime = 0;
-        this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 15.0f,  0);
+        this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 4.5f,  0);
         this.charBitmap.setIndices(100, 101, 102, 103);
     }
 

@@ -77,8 +77,9 @@ public class MainGame {
         score.setScore(0);
         add(Layer.ui, score);
 
-        HorizontalScrollBackground bg = new HorizontalScrollBackground(R.mipmap.cookie_run_bg_1, 10);
-        add(Layer.bg_1, bg);
+        add(Layer.bg_1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_1, -10));
+        add(Layer.bg_1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -50));
+        add(Layer.bg_1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -100));
 
 //        HorizontalScrollBackground clouds = new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, 20);
 //        add(Layer.bg_2, clouds);

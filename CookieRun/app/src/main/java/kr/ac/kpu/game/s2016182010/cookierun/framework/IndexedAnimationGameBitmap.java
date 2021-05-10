@@ -29,6 +29,7 @@ public class IndexedAnimationGameBitmap extends AnimationGameBitmap {
             int b = t + 270;
             srcRects.add(new Rect(l, t, r, b));
         }
+        this.frameCount = srcRects.size();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class IndexedAnimationGameBitmap extends AnimationGameBitmap {
         float hh = (int) (fh * 0.5 * GameView.MULTIPLIER);
 
         int elapsed = (int) (System.currentTimeMillis() - createdOn);
-        int frameIndex = Math.round(elapsed * 0.001f * framePerSec) % srcRects.size();
+        int frameIndex = Math.round(elapsed * 0.001f * framePerSec) % frameCount;
 
 //        srcRect.set((fw * frameIndex), 0, (fw * (frameIndex + 1)), fh);
         dstRect.set(x - hw, y - hh, x + hw, y + hh);
