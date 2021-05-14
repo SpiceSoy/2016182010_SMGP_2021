@@ -11,9 +11,9 @@ import kr.ac.kpu.game.s2016182010.cookierun.framework.view.GameView;
 
 public class ImageObject implements GameObject {
 
-    private final Bitmap bitmap;
-    private Rect srcRect = new Rect();
-    private RectF dstRect = new RectF();
+    protected final Bitmap bitmap;
+    protected Rect srcRect = new Rect();
+    protected RectF dstRect = new RectF();
 
     public ImageObject(int resId, float x, float y) {
         bitmap = GameBitmap.load(resId);
@@ -25,6 +25,14 @@ public class ImageObject implements GameObject {
         float b = y + h / 2 * GameView.MULTIPLIER;
         dstRect.set(l, t, r, b);
         srcRect.set(0, 0, w, h);
+    }
+
+    public float getDestWidth() {
+        return dstRect.width();
+    }
+
+    public float getDestHeight() {
+        return dstRect.height();
     }
 
     @Override

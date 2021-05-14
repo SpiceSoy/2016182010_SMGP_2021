@@ -14,12 +14,9 @@ public class MainGame extends BaseGame {
     private boolean initialized = false;
 
     public enum Layer {
-        bg_1,
-        enemy,
-        bullet,
+        bg,
+        platform,
         player,
-        controller,
-        bg_2,
         ui,
         LAYER_COUNT
     }
@@ -34,7 +31,6 @@ public class MainGame extends BaseGame {
 
         player = new Player(w / 2, h - 300);
         add(Layer.player, player);
-//        add(Layer.controller, new EnemyGenerator());
 
         int margin = (int) (40 * GameView.MULTIPLIER);
 
@@ -42,12 +38,16 @@ public class MainGame extends BaseGame {
         score.setScore(0);
         add(Layer.ui, score);
 
-        add(Layer.bg_1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_1, -10));
-        add(Layer.bg_1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -50));
-        add(Layer.bg_1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -100));
+        add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_1, -10));
+        add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -50));
+        add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -100));
 
-//        HorizontalScrollBackground clouds = new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, 20);
-//        add(Layer.bg_2, clouds);
+        float tx = 0, ty = h - 500;
+        while (tx < w) {
+            Platform platform = new Platform(Platform.Type.T_10X2, tx, ty);
+            add(Layer.platform, platform);
+            tx += platform.getDestWidth();
+        }
 
         initialized = true;
         return true;
