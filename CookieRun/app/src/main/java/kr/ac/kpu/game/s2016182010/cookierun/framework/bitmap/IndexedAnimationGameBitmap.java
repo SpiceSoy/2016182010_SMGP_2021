@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s2016182010.cookierun.framework;
+package kr.ac.kpu.game.s2016182010.cookierun.framework.bitmap;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

@@ -4,10 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.cookierun.R;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.BoxCollidable;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.GameObject;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.IndexedAnimationGameBitmap;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.MainGame;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.iface.BoxCollidable;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.iface.GameObject;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.bitmap.IndexedAnimationGameBitmap;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.game.BaseGame;
 
 public class Player implements GameObject, BoxCollidable {
     private static final int BULLET_SPEED = 1500;
@@ -37,7 +37,7 @@ public class Player implements GameObject, BoxCollidable {
 
     @Override
     public void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         float dx = (tx < x ? -1 : 1) * speed * game.frameTime;
         x += dx;
         if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {

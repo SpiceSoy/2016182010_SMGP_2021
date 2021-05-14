@@ -6,8 +6,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.cookierun.R;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.GameBitmap;
-import kr.ac.kpu.game.s2016182010.cookierun.framework.GameObject;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.bitmap.GameBitmap;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.view.GameView;
 
 public class Score implements GameObject {

@@ -8,13 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import kr.ac.kpu.game.s2016182010.cookierun.R;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.view.GameView;
+import kr.ac.kpu.game.s2016182010.cookierun.game.MainGame;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private MainGame mainGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mainGame = new MainGame();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

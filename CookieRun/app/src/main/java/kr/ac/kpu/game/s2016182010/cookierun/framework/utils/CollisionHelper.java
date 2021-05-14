@@ -1,8 +1,8 @@
-package kr.ac.kpu.game.s2016182010.cookierun.utils;
+package kr.ac.kpu.game.s2016182010.cookierun.framework.utils;
 
 import android.graphics.RectF;
 
-import kr.ac.kpu.game.s2016182010.cookierun.framework.BoxCollidable;
+import kr.ac.kpu.game.s2016182010.cookierun.framework.iface.BoxCollidable;
 
 public class CollisionHelper {
     private static RectF rect1 = new RectF();
