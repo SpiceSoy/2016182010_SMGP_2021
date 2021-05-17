@@ -8,32 +8,44 @@ import kr.ac.kpu.game.s2016182010.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.view.GameView;
 
 public class Platform extends ImageObject implements BoxCollidable {
-
-    enum Type {
+    private static final int UNIT_SIZE = 40;
+    public enum Type {
         T_10X2,
         T_2X2,
-        T_3X1
+        T_3X1;
+
+        float width() {
+            int w= 1;
+            switch (this) {
+                case T_10X2: w = 10;
+                case T_2X2: w = 2;
+                case T_3X1: w = 3;
+            }
+            return w * UNIT_SIZE * GameView.MULTIPLIER;
+        }
+        float height() {
+            int h = 1;
+            switch (this) {
+                case T_10X2: h = 2;
+                case T_2X2: h = 2;
+                case T_3X1: h = 1;
+            }
+            return h * UNIT_SIZE * GameView.MULTIPLIER;
+        }
+        int resId() {
+            switch (this) {
+                case T_10X2: return R.mipmap.cookierun_platform_480x48;
+                case T_2X2: return R.mipmap.cookierun_platform_124x120;
+                case T_3X1:return R.mipmap.cookierun_platform_120x40;
+            }
+            return -1;
+        }
     }
 
-    static final int[] TYPE_RES_ID = {
-            R.mipmap.cookierun_platform_480x48,
-            R.mipmap.cookierun_platform_124x120,
-            R.mipmap.cookierun_platform_120x40
-    };
-
-    static final float UNIT = 40 * GameView.MULTIPLIER;
-    static final float[] TYPE_SIZE_X_UNIT = {
-        10, 2, 3
-    };
-
-    static final float[] TYPE_SIZE_Y_UNIT = {
-        2, 2, 1
-    };
-
     public Platform(Type type, float x, float y) {
-        super(TYPE_RES_ID[type.ordinal()], x, y);
-        float w = UNIT * TYPE_SIZE_X_UNIT[type.ordinal()];
-        float h = UNIT * TYPE_SIZE_Y_UNIT[type.ordinal()];
+        super(type.resId(), x, y);
+        float w = type.width();
+        float h = type.height();
         dstRect.set(x, y, x+w, y+h);
     }
 

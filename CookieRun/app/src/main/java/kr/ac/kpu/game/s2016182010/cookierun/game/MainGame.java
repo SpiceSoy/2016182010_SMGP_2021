@@ -29,7 +29,7 @@ public class MainGame extends BaseGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        player = new Player(w / 2, h - 300);
+        player = new Player(200, h - 300);
         add(Layer.player, player);
 
         int margin = (int) (40 * GameView.MULTIPLIER);
@@ -42,7 +42,7 @@ public class MainGame extends BaseGame {
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -50));
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -100));
 
-        float tx = 0, ty = h - 500;
+        float tx = 0, ty = h - Platform.Type.T_2X2.height();
         while (tx < w) {
             Platform platform = new Platform(Platform.Type.T_10X2, tx, ty);
             add(Layer.platform, platform);
@@ -63,7 +63,8 @@ public class MainGame extends BaseGame {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-            player.moveTo(event.getX(), event.getY());
+//            player.moveTo(event.getX(), event.getY());
+            player.jump();
             return true;
         }
         return false;
