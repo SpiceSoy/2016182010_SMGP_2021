@@ -14,8 +14,8 @@ public class StageMap implements GameObject {
 
     @Override
     public void update() {
-        BaseGame game = BaseGame.get();
-        ArrayList<GameObject> objects = game.objectsAt(MainGame.Layer.platform.ordinal());
+        MainGame game = (MainGame) BaseGame.get();
+        ArrayList<GameObject> objects = game.objectsAt(MainGame.Layer.platform);
         float rightMax = 0;
         for(GameObject obj : objects) {
             Platform platform = (Platform) obj;
@@ -28,7 +28,7 @@ public class StageMap implements GameObject {
             Log.d(TAG, "create a platform here : " + rightMax);
             float tx = rightMax, ty = vh - Platform.Type.T_10X2.height();
             Platform platform = new Platform(Platform.Type.T_10X2, tx, ty);
-            game.add(MainGame.Layer.platform.ordinal(),platform);
+            game.add(MainGame.Layer.platform,platform);
         }
     }
 
