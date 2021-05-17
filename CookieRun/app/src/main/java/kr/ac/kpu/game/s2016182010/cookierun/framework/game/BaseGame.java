@@ -113,4 +113,8 @@ public class BaseGame {
             runnable.run();
         }
     }
+
+    public ArrayList<GameObject> objectsAt(int layerIndex) {
+        return layers.get(layerIndex);
+    }
 }

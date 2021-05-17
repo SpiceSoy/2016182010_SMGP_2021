@@ -18,6 +18,7 @@ public class MainGame extends BaseGame {
         platform,
         player,
         ui,
+        controller,
         LAYER_COUNT
     }
 
@@ -42,6 +43,8 @@ public class MainGame extends BaseGame {
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -50));
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -100));
 
+        add(Layer.controller, new StageMap());
+
         float tx = 0, ty = h - Platform.Type.T_2X2.height();
         while (tx < w) {
             Platform platform = new Platform(Platform.Type.T_10X2, tx, ty);
@@ -56,8 +59,6 @@ public class MainGame extends BaseGame {
     @Override
     public void update() {
         super.update();
-
-
     }
 
     @Override

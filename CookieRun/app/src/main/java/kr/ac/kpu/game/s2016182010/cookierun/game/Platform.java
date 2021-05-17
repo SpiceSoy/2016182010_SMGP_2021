@@ -10,7 +10,9 @@ import kr.ac.kpu.game.s2016182010.cookierun.framework.view.GameView;
 
 public class Platform extends ImageObject implements BoxCollidable {
     private static final int UNIT_SIZE = 40;
-    private static final int SPEED = 150;
+    private static final int SPEED = 350;
+
+
     public enum Type {
         T_10X2,
         T_2X2,
@@ -54,6 +56,10 @@ public class Platform extends ImageObject implements BoxCollidable {
     @Override
     public void getBoundingRect(RectF rect) {
 
+    }
+
+    public float getRight() {
+        return dstRect.right;
     }
 
     @Override
