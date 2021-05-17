@@ -2,6 +2,8 @@ package kr.ac.kpu.game.s2016182010.cookierun.game;
 
 import android.view.MotionEvent;
 
+import java.util.ArrayList;
+
 import kr.ac.kpu.game.s2016182010.cookierun.R;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s2016182010.cookierun.framework.iface.GameObject;
@@ -13,15 +15,16 @@ public class MainGame extends BaseGame {
     private Score score;
     private boolean initialized = false;
 
+
+
     public enum Layer {
         bg,
         platform,
         player,
         ui,
         controller,
-        LAYER_COUNT
+        LAYER_COUNT;
     }
-
     @Override
     public boolean initResources() {
         if (initialized) return false;
@@ -47,7 +50,7 @@ public class MainGame extends BaseGame {
 
         float tx = 0, ty = h - Platform.Type.T_2X2.height();
         while (tx < w) {
-            Platform platform = new Platform(Platform.Type.T_10X2, tx, ty);
+            Platform platform = new Platform(Platform.Type.Random, tx, ty);
             add(Layer.platform, platform);
             tx += platform.getDestWidth();
         }
@@ -59,6 +62,10 @@ public class MainGame extends BaseGame {
     @Override
     public void update() {
         super.update();
+    }
+
+    public ArrayList<GameObject> objectsAt(Layer platform) {
+        return objectsAt(platform.ordinal());
     }
 
     @Override

@@ -27,7 +27,7 @@ public class StageMap implements GameObject {
         if(rightMax < vw) {
             Log.d(TAG, "create a platform here : " + rightMax);
             float tx = rightMax, ty = vh - Platform.Type.T_10X2.height();
-            Platform platform = new Platform(Platform.Type.T_10X2, tx, ty);
+            Platform platform = new Platform(Platform.Type.Random, tx, ty);
             game.add(MainGame.Layer.platform,platform);
         }
     }
