@@ -21,6 +21,7 @@ public class MainGame extends BaseGame {
         bg,
         platform,
         player,
+        item,
         ui,
         controller,
         LAYER_COUNT;
