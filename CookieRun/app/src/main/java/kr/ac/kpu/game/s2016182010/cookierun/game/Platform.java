@@ -67,6 +67,8 @@ public class Platform extends ImageObject implements BoxCollidable {
         BaseGame game = MainGame.get();
         float dx = SPEED * game.frameTime;
         dstRect.offset(-dx, 0);
-        super.update();
+        if(getRight() < 0) {
+            game.remove(this);
+        }
     }
 }
