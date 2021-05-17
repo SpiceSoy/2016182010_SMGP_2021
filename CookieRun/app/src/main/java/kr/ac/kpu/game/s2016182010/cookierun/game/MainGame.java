@@ -29,7 +29,7 @@ public class MainGame extends BaseGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        player = new Player(200, h - 300);
+        player = new Player(200, h - Platform.Type.T_2X2.height() - 250);
         add(Layer.player, player);
 
         int margin = (int) (40 * GameView.MULTIPLIER);
@@ -56,7 +56,8 @@ public class MainGame extends BaseGame {
     @Override
     public void update() {
         super.update();
-        // Collision
+
+
     }
 
     @Override
