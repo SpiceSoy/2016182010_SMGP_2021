@@ -34,7 +34,7 @@ public class BlockManager implements GameObject {
         down.setY(downY);
 
         MainGame game = MainGame.get();
-        game.add(up);
-        game.add(down);
+        game.add(MainGame.Layer.block, up);
+        game.add(MainGame.Layer.block, down);
     }
 }

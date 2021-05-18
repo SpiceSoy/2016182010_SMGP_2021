@@ -17,6 +17,19 @@ public class MainGame {
     static MainGame instance;
     private Ball ball;
     private BlockManager blockManager;
+    private ArrayList<ArrayList<GameObject>> layers;
+
+    public enum Layer {
+        bg_0,
+        bg_1,
+        ball,
+        block,
+        controller,
+        fg,
+        ui,
+        LAYER_COUNT
+    }
+
 
     public static MainGame get() {
         if (instance == null) {
@@ -28,20 +41,26 @@ public class MainGame {
     public float frameTime;
     public static final int BALL_COUNT = 10;
 
-    private ArrayList<GameObject> objects = new ArrayList<>();
-
     private boolean initialized = false;
+
+    private void initLayers(int layerCount) {
+        layers = new ArrayList<>();
+        for (int i = 0; i < layerCount; i++) {
+            layers.add(new ArrayList<>());
+        }
+    }
 
     public boolean initResources() {
         if (initialized) return false;
         float w = GameView.instance.getWidth();
         float h = GameView.instance.getHeight();
 
-//        player = new Player(w / 2, h - 300, 0, 0);
+        initLayers(Layer.LAYER_COUNT.ordinal());
+
         ball = new Ball(R.mipmap.bird1_1, w/2, h/2);
         blockManager = new BlockManager();
-        objects.add(ball);
-        objects.add(blockManager);
+        add(Layer.ball, ball);
+        add(Layer.controller, blockManager);
 
         for(int i = 0; i < 100; i++) {
             blockManager.addRandomBlockSet(w* 0.9f + i * w * 1.0f);
@@ -51,26 +70,25 @@ public class MainGame {
     }
 
     public void update() {
-//        if(!initialized) return;  //현재는 무의미
-        for (GameObject o : objects) {
-            o.update();
+        for (ArrayList<GameObject> objects : layers) {
+            for (GameObject o : objects) {
+                o.update();
+            }
         }
 
-        for (GameObject o : objects) {
-            if(!(o instanceof Block)) {
-                continue;
-            } else{
-                CollisionHelper.COL_TYPE result = CollisionHelper.getCollideDirection(ball, (Block) o);
-                ball.onCollisionBlock(result);
-            }
+        for (GameObject o : layers.get(Layer.block.ordinal())) {
+            CollisionHelper.COL_TYPE result = CollisionHelper.getCollideDirection(ball, (Block) o);
+            ball.onCollisionBlock(result);
         }
     }
 
     Camera camera = new Camera();
     public void draw(Canvas canvas) {
         camera.startCamera(ball.getPositionX(), canvas);
-        for (GameObject o : objects) {
-            o.draw(canvas);
+        for (ArrayList<GameObject> objects : layers) {
+            for (GameObject o : objects) {
+                o.draw(canvas);
+            }
         }
         camera.endCamera(canvas);
     }
@@ -93,18 +111,39 @@ public class MainGame {
         return false;
     }
 
-    public void add(GameObject gameObject) {
-        this.objects.add(gameObject);
-    }
-
-    public void remove(GameObject gameObject) {
+    public void add(Layer layer, GameObject gameObject) {
         GameView.instance.post(
                 new Runnable() {
                     @Override
                     public void run() {
-                        objects.remove(gameObject);
+                        ArrayList<GameObject> objects = layers.get(layer.ordinal());
+                        objects.add(gameObject);
                     }
                 }
         );
+    }
+
+    public void remove(GameObject gameObject, boolean delayed) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                for (ArrayList<GameObject> objects : layers) {
+                    boolean removed = objects.remove(gameObject);
+                    if (removed) {
+//                        if (gameObject instanceof Recyclable) {
+//                            ((Recyclable) gameObject).recycle();
+//                            recycle(gameObject);
+//                        }
+                        break;
+                    }
+                }
+            }
+        };
+
+        if (delayed) {
+            GameView.instance.post(runnable);
+        } else {
+            runnable.run();
+        }
     }
 }
