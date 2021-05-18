@@ -32,12 +32,9 @@ public class HorizontalScrollBackground implements GameObject {
 
     @Override
     public void update() {
+        MainGame game = MainGame.get();
+        this.scroll = -game.camera.getLeft() * speedRatio;
     }
-
-    public void move(float length) {
-        this.scroll += length;
-    }
-
 
     @Override
     public void draw(Canvas canvas) {
@@ -49,11 +46,14 @@ public class HorizontalScrollBackground implements GameObject {
 
         int curr = (int)scroll % dw;
         if (curr > 0) curr -= dw;
-
-        while (curr < vw) {
+        MainGame game = MainGame.get();
+        canvas.save();
+        canvas.translate(game.camera.getLeft(),0);
+        while (curr < vw + dw) {
             dstRect.set(curr, 0, curr + dw, vh);
             canvas.drawBitmap(bitmap, srcRect, dstRect, null);
             curr += dw;
         }
+        canvas.restore();
     }
 }

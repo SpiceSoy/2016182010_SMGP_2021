@@ -61,7 +61,7 @@ public class MainGame {
         blockManager = new BlockManager();
         add(Layer.ball, ball);
         add(Layer.controller, blockManager);
-
+        add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_night, 1));
         for(int i = 0; i < 100; i++) {
             blockManager.addRandomBlockSet(w* 0.9f + i * w * 1.0f);
         }
@@ -82,7 +82,7 @@ public class MainGame {
         }
     }
 
-    Camera camera = new Camera();
+    public Camera camera = new Camera();
     public void draw(Canvas canvas) {
         camera.startCamera(ball.getPositionX(), canvas);
         for (ArrayList<GameObject> objects : layers) {
