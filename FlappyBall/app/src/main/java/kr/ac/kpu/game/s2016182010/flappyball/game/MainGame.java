@@ -61,7 +61,9 @@ public class MainGame {
         blockManager = new BlockManager();
         add(Layer.ball, ball);
         add(Layer.controller, blockManager);
-        add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_night, 1));
+        add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_night, 0.8f));
+        add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_star, 0.1f));
+        add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_cloud, 0.45f));
         for(int i = 0; i < 100; i++) {
             blockManager.addRandomBlockSet(w* 0.9f + i * w * 1.0f);
         }
