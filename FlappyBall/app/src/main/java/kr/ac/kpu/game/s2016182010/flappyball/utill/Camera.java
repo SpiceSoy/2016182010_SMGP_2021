@@ -18,9 +18,9 @@ public class Camera {
     }
 
     public float getRight() {
-        return lastPositionX + (GameView.instance.getWidth() * 0.5f);
+        return lastPositionX + (GameView.instance.getWidth() * 1.0f);
     }
     public float getLeft() {
-        return lastPositionX - (GameView.instance.getWidth() * 0.5f);
+        return lastPositionX - (GameView.instance.getWidth() * 0.0f);
     }
 }

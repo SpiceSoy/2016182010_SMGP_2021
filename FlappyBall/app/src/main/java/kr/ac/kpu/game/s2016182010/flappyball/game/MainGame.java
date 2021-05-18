@@ -64,6 +64,7 @@ public class MainGame {
         add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_night, 0.8f));
         add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_star, 0.1f));
         add(Layer.bg_0, new HorizontalScrollBackground(R.mipmap.bg_cloud, 0.45f));
+        add(Layer.ui, new Score((int)(w * 0.5f), (int)(h * 0.8f)));
         for(int i = 0; i < 100; i++) {
             blockManager.addRandomBlockSet(w* 0.9f + i * w * 1.0f);
         }
