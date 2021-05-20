@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import kr.ac.kpu.game.s2016182010.flappyball.GameOverActivity;
 import kr.ac.kpu.game.s2016182010.flappyball.MainActivity;
 import kr.ac.kpu.game.s2016182010.flappyball.R;
+import kr.ac.kpu.game.s2016182010.flappyball.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.BoxCollide;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
@@ -27,10 +28,10 @@ public class Ball implements GameObject, BoxCollide {
     private float velocityY;
 
 
-    GameBitmap bitmap;
+    AnimationGameBitmap bitmap;
 
-    Ball(int resId, float x, float y) {
-        bitmap = new GameBitmap(resId);
+    Ball(float x, float y) {
+        bitmap = new AnimationGameBitmap(R.mipmap.bird_anim, 30f, 3);
         this.positionX = x;
         this.positionY = y;
     }

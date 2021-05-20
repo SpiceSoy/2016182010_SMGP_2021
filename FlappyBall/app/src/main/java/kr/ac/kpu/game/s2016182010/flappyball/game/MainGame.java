@@ -57,7 +57,7 @@ public class MainGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        ball = new Ball(R.mipmap.bird1_1, w/2, h/2);
+        ball = new Ball(w/2, h/2);
         blockManager = new BlockManager();
         add(Layer.ball, ball);
         add(Layer.controller, blockManager);
