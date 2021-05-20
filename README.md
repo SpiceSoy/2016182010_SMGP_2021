@@ -39,10 +39,17 @@ Flappy Ball
 기본적인 프레임워크 구조는 수업에서 사용하는 프레임워크 구조 사용.
 
 ### Ball  
+<img src="/Doc/bird1_1.png" width="5%" height="5%"></img>
+<br>
 플레이어 조작 처리 및 블럭 충돌 시 행동 처리  
 카메라 밖으로 나가는지 체크도 해당 클래스에서 수행
 
 ### Block  
+<img src="/Doc/bg_pillardown.png" width="5%" height="5%"></img>
+<img src="/Doc/bg_pillarup.png" width="5%" height="5%"></img>
+<img src="/Doc/bg_pillardown_red.png" width="5%" height="5%"></img>
+<img src="/Doc/bg_pillarup_red.png" width="5%" height="5%"></img>
+<br>
 블럭 타입 및 방향에 따른 이미지 출력 및 물리 정보 보유  
 충돌 시 탄성을 적용하여 Ball을 튕구는 일반 블럭 과 바로 게임오버 시키는 즉사 블럭 구현
 
@@ -54,7 +61,7 @@ Flappy Ball
 
 ### HorizontalScrollBackground
 수업에서 배운 것과 동일한 역할  
-지금 프로젝트에서 들어가있는 Camera 정보 고려하여 스크롤링 및 draw 수행
+지금 프로젝트에서 들어가있는 Camera 정보 고려하여 배경 스크롤링 및 draw 수행
 
 ### Score
 수업에서 배운 것과 동일, 플레이어가 날아간 최대 거리 출력
@@ -67,4 +74,4 @@ canvas.translate를 이용하여 플레이어 위치를 따라가며 그리도�
 수업시간에 배운 것을 응용하여 충돌 여부 + 상하좌우 충돌 방향 계산하는 utill 클래스
 
 ## 5. ETC
-기획 발표 리드미 :  
+기획 발표 리드미 : [README_prev0.md](README_prev0.md)
