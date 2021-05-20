@@ -24,7 +24,9 @@ public class Block implements GameObject, BoxCollide {
     }
 
     enum BLOCK_TYPE {
-        NORMAL
+        NORMAL,
+        RED,
+        TYPE_COUNT
     }
 
     Block(BLOCK_POSITION position, BLOCK_TYPE type, float x, float y) {
@@ -32,7 +34,7 @@ public class Block implements GameObject, BoxCollide {
         this.blockType = type;
         this.x = x;
         this.y = y;
-        int resId = this.blockPosition == BLOCK_POSITION.TOP ? R.mipmap.bg_pillarup : R.mipmap.bg_pillardown;
+        int resId = getResId();
         this.bitmap = new GameBitmap(resId);
     }
 
@@ -54,6 +56,15 @@ public class Block implements GameObject, BoxCollide {
     private float getRectCenterY() {
         float hh = (this.blockPosition == BLOCK_POSITION.TOP ? 0.5f : -0.5f) * this.bitmap.getHeight();
         return this.y + hh;
+    }
+    private int getResId() {
+        switch (this.blockPosition){
+            case BOTTOM:
+                return this.blockType == BLOCK_TYPE.NORMAL ? R.mipmap.bg_pillardown : R.mipmap.bg_pillardown_red;
+            case TOP:
+                return this.blockType == BLOCK_TYPE.NORMAL ? R.mipmap.bg_pillarup : R.mipmap.bg_pillarup_red;
+        }
+        return -1;
     }
 
     public void setX(float x) {

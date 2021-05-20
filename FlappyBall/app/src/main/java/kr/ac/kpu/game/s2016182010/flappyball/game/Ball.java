@@ -9,6 +9,7 @@ import android.graphics.RectF;
 
 import kr.ac.kpu.game.s2016182010.flappyball.GameOverActivity;
 import kr.ac.kpu.game.s2016182010.flappyball.MainActivity;
+import kr.ac.kpu.game.s2016182010.flappyball.R;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.BoxCollide;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
@@ -72,10 +73,15 @@ public class Ball implements GameObject, BoxCollide {
     }
 
     private void gameOver() {
-        Intent intent = new Intent((Activity)GameView.instance.getContext(), GameOverActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        ((Activity)GameView.instance.getContext()).startActivity(intent);
+//        GameView.instance.post(
+//                new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        MainActivity mainActivity = (MainActivity) GameView.instance.getContext();
+//                        mainActivity.changeGameOver(0);
+//                    }
+//                }
+//        );
     }
 
     public void shoot(float startX, float startY, float endX, float endY) {
