@@ -57,7 +57,7 @@ Flappy Ball
 맵 제네레이터 역할
 블럭 생성, Block 클래스를 한번에 위, 아래로 생성  
 생성 시 블럭 간의 간격, 타입 지정 및 랜덤 생성  
-이 후 무한 생성 및 JSON 기반 패턴 작업 수행 예정 
+이 후 무한 생성 및 JSON 기반 블럭 배치 구현 예정 
 
 ### HorizontalScrollBackground
 수업에서 배운 것과 동일한 역할  
