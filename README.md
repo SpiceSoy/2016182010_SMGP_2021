@@ -73,4 +73,5 @@ canvas.translate를 이용하여 플레이어 위치를 따라가며 그리도�
 수업에서 배운 것과 동일, 플레이어가 날아간 최대 거리 출력
 
 ## 5. ETC
-기획 발표 리드미 : [README_prev0.md](README_prev0.md)
+기획 발표 리드미 : [백업본](README_prev0.md) [커밋 스냅샷](https://github.com/SpiceSoy/2016182010_SMGP_2021/tree/265320c8bc195aaf3b1441171d1bd1987ed544f8)
+
