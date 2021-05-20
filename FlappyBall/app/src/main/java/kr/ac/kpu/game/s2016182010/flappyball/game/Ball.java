@@ -56,6 +56,13 @@ public class Ball implements GameObject, BoxCollide {
     }
 
     public void onCollisionBlock(CollisionHelper.COL_TYPE colType, Block block) {
+        if(colType == CollisionHelper.COL_TYPE.NONE) return;
+        switch (block.getBlockType()) {
+            case NORMAL: this.processElasticity(colType); break;
+            case RED: this.gameOver(); break;
+        }
+    }
+    private void processElasticity(CollisionHelper.COL_TYPE colType) {
         switch (colType) {
             case TOP:
             case BOTTOM:
@@ -72,16 +79,14 @@ public class Ball implements GameObject, BoxCollide {
         }
     }
 
+
+    boolean isOver = false;
     private void gameOver() {
-//        GameView.instance.post(
-//                new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        MainActivity mainActivity = (MainActivity) GameView.instance.getContext();
-//                        mainActivity.changeGameOver(0);
-//                    }
-//                }
-//        );
+        if(!isOver) {
+            MainActivity mainActivity = (MainActivity) GameView.instance.getContext();
+            mainActivity.changeGameOver((int)(MainGame.get().camera.getLeft() * 0.001f));
+        }
+        isOver = true;
     }
 
     public void shoot(float startX, float startY, float endX, float endY) {

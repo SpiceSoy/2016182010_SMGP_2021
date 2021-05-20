@@ -87,4 +87,12 @@ public class Block implements GameObject, BoxCollide {
     public float getHeight() {
         return bitmap.getHeight();
     }
+
+    public BLOCK_POSITION getBlockPosition() {
+        return blockPosition;
+    }
+
+    public BLOCK_TYPE getBlockType() {
+        return blockType;
+    }
 }
