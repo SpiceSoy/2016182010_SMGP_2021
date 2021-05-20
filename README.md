@@ -59,12 +59,12 @@ Flappy Ball
 생성 시 블럭 간의 간격, 타입 지정 및 랜덤 생성  
 이 후 블럭 삭제, 무한 생성 및 JSON 기반 블럭 배치 구현 예정 
 
-### HorizontalScrollBackground
-수업에서 배운 것과 동일하나 Camera 정보 고려하여 배경 스크롤링 및 draw 수행
-
 ### Camera
 canvas.translate를 이용하여 플레이어 위치를 따라가며 그리도록 수행  
 플레이어가 앞이 아닌 뒤로 이동 시 카메라는 고정되어 움직이지 않음
+
+### HorizontalScrollBackground
+수업에서 배운 것과 동일하나 Camera 정보 고려하여 배경 스크롤링 및 draw 수행
 
 ### Collision Helper
 수업시간에 배운 것을 응용하여 충돌 여부 + 상하좌우 충돌 방향 계산하는 utill 클래스
