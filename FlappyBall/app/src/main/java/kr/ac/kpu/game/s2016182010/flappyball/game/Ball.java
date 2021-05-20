@@ -1,10 +1,14 @@
 package kr.ac.kpu.game.s2016182010.flappyball.game;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import kr.ac.kpu.game.s2016182010.flappyball.GameOverActivity;
+import kr.ac.kpu.game.s2016182010.flappyball.MainActivity;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.BoxCollide;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
@@ -36,8 +40,8 @@ public class Ball implements GameObject, BoxCollide {
         this.velocityY += GRAVITY_FORCE * game.frameTime;
         move();
 
-        if (this.positionY > GameView.instance.getHeight()) {
-            this.onCollisionBlock(CollisionHelper.COL_TYPE.TOP);
+        if (this.positionY > GameView.instance.getHeight() || this.positionY < 0 || this.positionX < game.camera.getLeft()) {
+            gameOver();
         }
     }
 
@@ -50,7 +54,7 @@ public class Ball implements GameObject, BoxCollide {
         this.positionY += (reverse ? -1 : 1) * this.velocityY * game.frameTime;
     }
 
-    public void onCollisionBlock(CollisionHelper.COL_TYPE colType) {
+    public void onCollisionBlock(CollisionHelper.COL_TYPE colType, Block block) {
         switch (colType) {
             case TOP:
             case BOTTOM:
@@ -65,6 +69,13 @@ public class Ball implements GameObject, BoxCollide {
                 velocityY *= +ELASTICITY;
                 break;
         }
+    }
+
+    private void gameOver() {
+        Intent intent = new Intent((Activity)GameView.instance.getContext(), GameOverActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        ((Activity)GameView.instance.getContext()).startActivity(intent);
     }
 
     public void shoot(float startX, float startY, float endX, float endY) {

@@ -81,7 +81,7 @@ public class MainGame {
 
         for (GameObject o : layers.get(Layer.block.ordinal())) {
             CollisionHelper.COL_TYPE result = CollisionHelper.getCollideDirection(ball, (Block) o);
-            ball.onCollisionBlock(result);
+            ball.onCollisionBlock(result, (Block) o);
         }
     }
 
