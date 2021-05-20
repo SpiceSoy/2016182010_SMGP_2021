@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/bg_night">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bg_gameover"
+        android:layout_weight="3"
+        android:padding="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30sp"
+        android:layout_weight="1"
+        android:background="@drawable/round_pannel"
+        android:orientation="vertical"
+        android:padding="40dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9999M"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="80dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="날아감!"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="60dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1등"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_marginRight="10dp"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="닉네임 입력창"
+                android:textColor="@color/white"
+                android:textColorHint="#D4D6D9"
+                android:colorControlNormal="@color/white"
+                android:colorControlActivated="@color/white"
+                android:textSize="30dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="bottom">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="등록"
+                android:textSize="25sp"
+                android:backgroundTint="#0F6F5C"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="취소"
+                android:textSize="25sp"
+                android:backgroundTint="#0F6F5C"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
