@@ -60,11 +60,7 @@ Flappy Ball
 이 후 무한 생성 및 JSON 기반 블럭 배치 구현 예정 
 
 ### HorizontalScrollBackground
-수업에서 배운 것과 동일한 역할  
-지금 프로젝트에서 들어가있는 Camera 정보 고려하여 배경 스크롤링 및 draw 수행
-
-### Score
-수업에서 배운 것과 동일, 플레이어가 날아간 최대 거리 출력
+수업에서 배운 것과 동일하나 Camera 정보 고려하여 배경 스크롤링 및 draw 수행
 
 ### Camera
 canvas.translate를 이용하여 플레이어 위치를 따라가며 그리도록 수행  
@@ -72,6 +68,9 @@ canvas.translate를 이용하여 플레이어 위치를 따라가며 그리도�
 
 ### Collision Helper
 수업시간에 배운 것을 응용하여 충돌 여부 + 상하좌우 충돌 방향 계산하는 utill 클래스
+
+### Score
+수업에서 배운 것과 동일, 플레이어가 날아간 최대 거리 출력
 
 ## 5. ETC
 기획 발표 리드미 : [README_prev0.md](README_prev0.md)
