@@ -9,7 +9,7 @@ import kr.ac.kpu.game.s2016182010.cookierun.framework.object.ImageObject;
 
 public class Jelly extends ImageObject {
     private final IndexedGameBitmap ibmp;
-    private final float x;
+    private float x;
     private final float y;
 
     public Jelly(int index, float x, float y) {
@@ -26,7 +26,8 @@ public class Jelly extends ImageObject {
     public void update() {
         BaseGame game = MainGame.get();
         float dx = Platform.SPEED * game.frameTime;
-        dstRect.offset(-dx, 0);
+        this.x += -dx;
+//        dstRect.offset(-dx, 0);
         if(getRight() < 0) {
             game.remove(this);
         }
@@ -34,6 +35,6 @@ public class Jelly extends ImageObject {
 
     @Override
     public void draw(Canvas canvas) {
-        ibmp.draw(canvas, dstRect);
+        ibmp.draw(canvas, x, y);
     }
 }
