@@ -13,7 +13,7 @@ import kr.ac.kpu.game.s2016182010.cookierun.framework.view.GameView;
 
 public class Platform extends ImageObject implements BoxCollidable {
     private static final String TAG = Platform.class.getSimpleName();
-    private static final int UNIT_SIZE = 40;
+    public static final int UNIT_SIZE = 45;
     public static final int SPEED = 350;
 
 

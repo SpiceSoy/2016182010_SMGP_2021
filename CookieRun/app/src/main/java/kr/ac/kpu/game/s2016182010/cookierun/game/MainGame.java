@@ -49,12 +49,12 @@ public class MainGame extends BaseGame {
 
         add(Layer.controller, new StageMap("stage_01.txt"));
 
-        float tx = 0, ty = h - Platform.Type.T_2X2.height();
-        while (tx < w) {
-            Platform platform = new Platform(Platform.Type.Random, tx, ty);
-            add(Layer.platform, platform);
-            tx += platform.getDestWidth();
-        }
+//        float tx = 0, ty = h - Platform.Type.T_2X2.height();
+//        while (tx < w) {
+//            Platform platform = new Platform(Platform.Type.Random, tx, ty);
+//            add(Layer.platform, platform);
+//            tx += platform.getDestWidth();
+//        }
 
         initialized = true;
         return true;
