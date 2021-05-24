@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import kr.ac.kpu.game.s2016182010.flappyball.game.MainGame;
+
 public class TitleActivity extends AppCompatActivity {
 
     @Override
@@ -16,7 +18,7 @@ public class TitleActivity extends AppCompatActivity {
 
     public void start(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }

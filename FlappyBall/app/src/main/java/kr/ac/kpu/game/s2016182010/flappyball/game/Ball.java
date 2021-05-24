@@ -84,8 +84,10 @@ public class Ball implements GameObject, BoxCollide {
     boolean isOver = false;
     private void gameOver() {
         if(!isOver) {
+            MainGame game = MainGame.get();
+            game.setEnd(true);
             MainActivity mainActivity = (MainActivity) GameView.instance.getContext();
-            mainActivity.changeGameOver((int)(MainGame.get().camera.getLeft() * 0.001f));
+            mainActivity.changeGameOver((int)(game.camera.getLeft() * 0.001f));
         }
         isOver = true;
     }

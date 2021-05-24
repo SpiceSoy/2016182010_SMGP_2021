@@ -18,6 +18,8 @@ public class MainGame {
     private Ball ball;
     private BlockManager blockManager;
     private ArrayList<ArrayList<GameObject>> layers;
+    private boolean isEnd = false;
+    public Camera camera;
 
     public enum Layer {
         bg_0,
@@ -43,6 +45,13 @@ public class MainGame {
 
     private boolean initialized = false;
 
+    public void resetGame() {
+        if(layers != null)
+            layers.clear();
+        initialized = false;
+        isEnd = false;
+    }
+
     private void initLayers(int layerCount) {
         layers = new ArrayList<>();
         for (int i = 0; i < layerCount; i++) {
@@ -56,6 +65,8 @@ public class MainGame {
         float h = GameView.instance.getHeight();
 
         initLayers(Layer.LAYER_COUNT.ordinal());
+
+        camera = new Camera();
 
         ball = new Ball(w/2, h/2);
         blockManager = new BlockManager();
@@ -85,7 +96,6 @@ public class MainGame {
         }
     }
 
-    public Camera camera = new Camera();
     public void draw(Canvas canvas) {
         camera.startCamera(ball.getPositionX(), canvas);
         for (ArrayList<GameObject> objects : layers) {
@@ -148,5 +158,12 @@ public class MainGame {
         } else {
             runnable.run();
         }
+    }
+
+    public void setEnd(boolean end) {
+        isEnd = end;
+    }
+    public boolean isEnd() {
+        return isEnd;
     }
 }

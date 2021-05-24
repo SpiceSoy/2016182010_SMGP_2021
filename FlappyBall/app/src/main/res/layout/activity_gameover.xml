@@ -76,6 +76,7 @@
                 android:layout_margin="10dp"
                 android:text="등록"
                 android:textSize="25sp"
+                android:textColor="@color/white"
                 android:backgroundTint="#0F6F5C"
                 />
             <Button
@@ -85,7 +86,9 @@
                 android:layout_margin="10dp"
                 android:text="취소"
                 android:textSize="25sp"
-                android:backgroundTint="#0F6F5C"/>
+                android:textColor="@color/white"
+                android:backgroundTint="#0F6F5C"
+                android:onClick="moveToTitle"/>
         </LinearLayout>
     </LinearLayout>
 

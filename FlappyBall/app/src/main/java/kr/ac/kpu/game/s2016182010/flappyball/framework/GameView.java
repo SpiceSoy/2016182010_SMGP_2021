@@ -23,6 +23,7 @@ public class GameView extends View {
         super(context, attrs);
         GameView.instance = this;
         Sound.init(context);
+        MainGame.get().resetGame();
     }
 
     private void update() {
@@ -66,7 +67,8 @@ public class GameView extends View {
                         game.frameTime = ((float) (time - lastFrame) / 1000000000.0f);
                         update();
                         lastFrame = time;
-                        requestCallback();
+                        if(!game.isEnd())
+                            requestCallback();
                     }
                 }
         );
