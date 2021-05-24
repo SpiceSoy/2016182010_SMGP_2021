@@ -47,7 +47,7 @@ public class MainGame extends BaseGame {
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -50));
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -100));
 
-        add(Layer.controller, new StageMap());
+        add(Layer.controller, new StageMap("stage_01.txt"));
 
         float tx = 0, ty = h - Platform.Type.T_2X2.height();
         while (tx < w) {
