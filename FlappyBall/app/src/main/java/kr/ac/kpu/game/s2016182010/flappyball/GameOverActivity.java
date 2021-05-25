@@ -25,4 +25,12 @@ public class GameOverActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void moveToRanking(View view) {
+        Intent intent = new Intent(this, RankingActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+    }
 }
