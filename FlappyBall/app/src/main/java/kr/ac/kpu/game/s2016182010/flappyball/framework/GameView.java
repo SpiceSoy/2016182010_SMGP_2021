@@ -11,6 +11,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import kr.ac.kpu.game.s2016182010.flappyball.game.MainGame;
+import kr.ac.kpu.game.s2016182010.flappyball.utill.RankingDBHelper;
 
 
 public class GameView extends View {
