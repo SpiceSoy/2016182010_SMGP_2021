@@ -8,6 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/lv_r_name"
         android:text="1. AABBDS"
         android:textColor="@color/white"
         android:textSize="40sp"
@@ -16,6 +17,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/lv_r_value"
         android:text="5000"
         android:textSize="40sp"
         android:textColor="@color/white"

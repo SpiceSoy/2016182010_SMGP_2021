@@ -47,6 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:id="@+id/over_rank"
                 android:text="1등"
                 android:textSize="30dp"
                 android:textColor="@color/white"
@@ -57,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:hint="닉네임 입력창"
+                android:id="@+id/over_name"
                 android:textColor="@color/white"
                 android:textColorHint="#D4D6D9"
                 android:colorControlNormal="@color/white"
