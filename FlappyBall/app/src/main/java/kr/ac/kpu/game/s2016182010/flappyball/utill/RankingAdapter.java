@@ -47,7 +47,7 @@ public class RankingAdapter extends BaseAdapter {
         TextView one = view.findViewById(R.id.lv_r_name);
         TextView two = view.findViewById(R.id.lv_r_value);
         Pair<String, Integer> result = values.get(i);
-        one.setText(i + ". " + result.first);
+        one.setText((i + 1) + ". " + result.first);
         two.setText(result.second.toString());
 
         return view;

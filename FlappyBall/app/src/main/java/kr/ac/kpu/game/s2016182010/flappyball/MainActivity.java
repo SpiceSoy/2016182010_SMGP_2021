@@ -18,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeGameOver(int score) {
         Intent intent = new Intent(this, GameOverActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.putExtra("score", score);
         startActivity(intent);
+        finish();
     }
 }
