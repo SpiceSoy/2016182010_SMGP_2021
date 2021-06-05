@@ -1,0 +1,24 @@
+{
+  "patterns": [
+    [
+      {
+        "type": 0,
+        "center": 50,
+        "margin": 10,
+        "next": 10
+      },
+      {
+        "type": 0,
+        "center": 50,
+        "margin": 10,
+        "next": 10
+      },
+      {
+        "type": 0,
+        "center": 50,
+        "margin": 10,
+        "next": 10
+      }
+    ]
+  ]
+}

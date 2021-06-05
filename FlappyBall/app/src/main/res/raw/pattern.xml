@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--가로 세로 100 = 디스플레이 가로 세로 기준-->
+<Patterns>
+    <Pattern weight="1">
+        <Block type="1" center="50" margin="10" next="20"/>
+    </Pattern>
+</Patterns>

@@ -18,12 +18,12 @@ public class Block implements GameObject, BoxCollide {
     RectF dstRect = new RectF();
     GameBitmap bitmap;
 
-    enum BLOCK_POSITION {
+    public enum BLOCK_POSITION {
         TOP,
         BOTTOM,
     }
 
-    enum BLOCK_TYPE {
+    public enum BLOCK_TYPE {
         NORMAL,
         RED,
         TYPE_COUNT
