@@ -5,5 +5,5 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Pattern {
-    public ArrayList<PatternBlock> patternBlockArrayList;
+    public ArrayList<PatternBlock> patternBlockArrayList = new ArrayList<>();
 }
