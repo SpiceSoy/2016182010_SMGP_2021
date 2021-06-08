@@ -15,6 +15,7 @@ import kr.ac.kpu.game.s2016182010.flappyball.framework.BoxCollide;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameBitmap;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameObject;
 import kr.ac.kpu.game.s2016182010.flappyball.framework.GameView;
+import kr.ac.kpu.game.s2016182010.flappyball.framework.Sound;
 import kr.ac.kpu.game.s2016182010.flappyball.utill.CollisionHelper;
 
 public class Ball implements GameObject, BoxCollide {
@@ -62,6 +63,7 @@ public class Ball implements GameObject, BoxCollide {
             case NORMAL: this.processElasticity(colType); break;
             case RED: this.gameOver(); break;
         }
+        Sound.play(R.raw.hit);
     }
     private void processElasticity(CollisionHelper.COL_TYPE colType) {
         switch (colType) {
@@ -100,7 +102,7 @@ public class Ball implements GameObject, BoxCollide {
 //        float ndy = dy / length;
         this.velocityX = dx * SHOOT_FORCE;
         this.velocityY = dy * SHOOT_FORCE;
-
+        Sound.play(R.raw.effect);
     }
 
     public float getPositionX() {

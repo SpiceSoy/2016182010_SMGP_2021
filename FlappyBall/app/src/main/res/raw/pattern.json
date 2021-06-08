@@ -19,6 +19,44 @@
         "margin": 10,
         "next": 100
       }
+    ],
+    [
+      {
+        "type": 0,
+        "center": 20,
+        "margin": 10,
+        "next": 80
+      },
+      {
+        "type": 0,
+        "center": 40,
+        "margin": 10,
+        "next": 80
+      },
+      {
+        "type": 0,
+        "center": 60,
+        "margin": 10,
+        "next": 80
+      },
+      {
+        "type": 0,
+        "center": 80,
+        "margin": 10,
+        "next": 80
+      },
+      {
+        "type": 0,
+        "center": 60,
+        "margin": 10,
+        "next": 80
+      },
+      {
+        "type": 0,
+        "center": 50,
+        "margin": 10,
+        "next": 100
+      }
     ]
   ]
 }

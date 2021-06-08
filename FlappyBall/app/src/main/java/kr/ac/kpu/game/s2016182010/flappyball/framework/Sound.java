@@ -9,10 +9,12 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+import kr.ac.kpu.game.s2016182010.flappyball.R;
+
 public class Sound {
     private static final String TAG = Sound.class.getSimpleName();
     private static SoundPool soundPool;
-    private static int[] SOUND_IDS = {};
+    private static int[] SOUND_IDS = {R.raw.effect, R.raw.hit};
     private static HashMap<Integer, Integer> soundIdMap = new HashMap<>();
 
     public static void init(Context context) {
