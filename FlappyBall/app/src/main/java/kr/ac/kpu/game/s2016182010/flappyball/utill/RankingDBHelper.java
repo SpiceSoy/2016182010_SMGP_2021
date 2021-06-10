@@ -66,7 +66,7 @@ public class RankingDBHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { "My Title" };
 
         String sortOrder =
-                RankingContract.RankEntry.COLUMN_NAME_VALUE + " DESC";
+                "CAST(" + RankingContract.RankEntry.COLUMN_NAME_VALUE + " AS INTEGER) DESC;";
 
         Cursor cursor = db.query(
                 RankingContract.RankEntry.TABLE_NAME,   // The table to query

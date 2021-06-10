@@ -24,7 +24,7 @@ public class GameOverActivity extends AppCompatActivity {
         int score = getIntent().getIntExtra("score", 0);
         scoreView.setText(score + "M");
 
-        overRank = findViewById(R.id.over_rank);
+//        overRank = findViewById(R.id.over_rank);
         overName = findViewById(R.id.over_name);
     }
 
